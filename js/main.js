@@ -571,3 +571,47 @@
     });
   }
 })();
+
+/* ---------- Le site vit avec le defilement ---------- */
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+
+  /* Le heros recule doucement quand on descend */
+  var hero = document.querySelector('.hero');
+  if (hero) {
+    var hTick = false;
+    function heroScroll() {
+      hTick = false;
+      var y = Math.max(0, Math.min(1, window.scrollY / (window.innerHeight * 0.9)));
+      hero.style.setProperty('--hy', y.toFixed(3));
+    }
+    window.addEventListener('scroll', function () {
+      if (!hTick) { hTick = true; requestAnimationFrame(heroScroll); }
+    }, { passive: true });
+    heroScroll();
+  }
+
+  /* Le bandeau defile plus vite quand on defile : il repond a la main */
+  var track = document.querySelector('.marquee-track');
+  if (track) {
+    track.style.animation = 'none';
+    var x = 0, speed = 0.6, boost = 0, lastY = window.scrollY, half = 0;
+    function measure() { half = track.scrollWidth / 2; }
+    measure();
+    window.addEventListener('resize', measure);
+    window.addEventListener('scroll', function () {
+      var dy = Math.abs(window.scrollY - lastY);
+      lastY = window.scrollY;
+      boost = Math.min(14, boost + dy * 0.12);
+    }, { passive: true });
+    (function loop() {
+      x -= speed + boost;
+      boost *= 0.92;
+      if (half > 0 && -x >= half) x += half;
+      track.style.transform = 'translateX(' + x.toFixed(2) + 'px)';
+      requestAnimationFrame(loop);
+    })();
+  }
+})();

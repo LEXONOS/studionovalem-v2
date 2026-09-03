@@ -689,6 +689,31 @@ main { animation: page-in 520ms var(--ease) both; }
 @media (prefers-reduced-motion: reduce) { main { animation: none; } }
 
 /* Ambiance du heros : parallaxe souris et lucioles */
+/* Neon : halo chaud de l'enseigne une fois allumee, avec micro-vacillement */
+.hero.in.done .sf-sign { filter: drop-shadow(0 0 18px rgba(245, 196, 0, 0.55)) drop-shadow(0 0 46px rgba(245, 196, 0, 0.28)); }
+.hero.in.done .sf-sign text { animation: neon-flicker 6.5s steps(1) infinite; }
+@keyframes neon-flicker { 0%, 91%, 93.5%, 100% { opacity: 1; } 92%, 93% { opacity: .55; } }
+
+/* Le heros recule doucement quand on part explorer le site (--hy pilote par le scroll) */
+.hero .scene { transform: translateY(calc(var(--hy, 0) * 46px)) scale(calc(1 - var(--hy, 0) * 0.06)); transform-origin: 50% 20%; }
+
+/* Realisations : les cadres respirent, chacun a son rythme */
+.work .frame { animation: frame-float 7s ease-in-out infinite; }
+.work:nth-child(2) .frame { animation-delay: -2.4s; }
+.work:nth-child(3) .frame { animation-delay: -4.8s; }
+@keyframes frame-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+.work:hover .frame { animation-play-state: paused; }
+
+/* Gros boutons : une lueur d'enseigne au survol */
+.btn-xl:hover { box-shadow: 6px 6px 0 var(--goudron), 0 0 26px rgba(245, 196, 0, 0.55); }
+.btn-xl.btn-wa:hover { box-shadow: 6px 6px 0 var(--goudron), 0 0 26px rgba(37, 211, 102, 0.5); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero.in.done .sf-sign text { animation: none; }
+  .hero .scene { transform: none; }
+  .work .frame { animation: none; }
+}
+
 .hero .scene { will-change: transform; }
 .scene .sf-sign, .scene .sf-facade, .scene .sf-phone, .nono-hero { will-change: transform; transition: transform 120ms linear; }
 .lucioles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
