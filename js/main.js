@@ -467,7 +467,7 @@
   function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
 
   /* Révélation mot à mot des grands titres (uniquement les titres sans balise enfant) */
-  var heads = $$('h2.sign').filter(function (h) { return h.children.length === 0; });
+  var heads = document.body.classList.contains('sub') ? [] : $$('h2.sign').filter(function (h) { return h.children.length === 0; });
   if (!reduce && 'IntersectionObserver' in window) {
     heads.forEach(function (h) {
       var words = h.textContent.trim().split(/\s+/);
@@ -523,42 +523,6 @@
   'use strict';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var touch = window.matchMedia('(hover: none)').matches;
-
-  /* Etoiles de la nuit */
-  var starsBox = document.querySelector('.pacte-stars');
-  if (starsBox) {
-    var frag = document.createDocumentFragment();
-    for (var i = 0; i < 46; i++) {
-      var s = document.createElement('i');
-      s.style.left = (Math.random() * 100) + '%';
-      s.style.top = (Math.random() * 100) + '%';
-      s.style.setProperty('--td', (Math.random() * 3.4).toFixed(2) + 's');
-      if (Math.random() < 0.18) s.className = 'big';
-      frag.appendChild(s);
-    }
-    starsBox.appendChild(frag);
-  }
-
-  /* Progression au defilement : les bras se rejoignent, l'etincelle s'allume */
-  var pacte = document.getElementById('pacte');
-  if (pacte && !reduce) {
-    var ticking = false;
-    function update() {
-      ticking = false;
-      var r = pacte.getBoundingClientRect();
-      var vh = window.innerHeight;
-      var p = (vh - r.top) / (vh * 0.85);
-      p = Math.max(0, Math.min(1, p));
-      pacte.style.setProperty('--hs', p.toFixed(3));
-      pacte.classList.toggle('lit', p > 0.93);
-    }
-    window.addEventListener('scroll', function () {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-    update();
-  } else if (pacte) {
-    pacte.classList.add('lit');
-  }
 
   /* Lucioles dans le heros */
   var heroScene = document.querySelector('.hero .scene');

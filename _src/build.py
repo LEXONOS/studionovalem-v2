@@ -27,6 +27,7 @@ HELPER = ''
 def rel(block):
     """Passe les liens relatifs de l'accueil en liens depuis un sous-dossier."""
     block = block.replace('href="#', 'href="../#').replace('src="assets/', 'src="../assets/')
+    block = re.sub(r'href="(?!https?:|mailto:|tel:|\.\./|/|#)([a-z0-9-]+/)', r'href="../\1', block)
     block = block.replace('href="../#top"', 'href="../"')
     return block
 

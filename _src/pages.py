@@ -688,7 +688,7 @@ PAGES.append(dict(
 <tr><td>Espace client sécurisé</td><td>Connexion, documents privés, gestion des comptes</td><td>450 €</td></tr>
 <tr><td>Boutique en ligne</td><td>Catalogue, panier, paiement Stripe, commandes</td><td>dès 900 €</td></tr>
 </tbody></table>
-<h2>Agents IA et automatisations</h2>
+<h2 id="agents">Agents IA et automatisations</h2>
 <table class="seo-table"><tbody>
 <tr><td>Agent IA au téléphone</td><td>Il décroche quand vous ne pouvez pas : horaires, tarifs, réservation, message envoyé sur votre WhatsApp</td><td>Sur devis</td></tr>
 <tr><td>Réponses WhatsApp et Instagram</td><td>Réponse en quelques secondes jour et nuit, les demandes sérieuses vous remontent</td><td>Sur devis</td></tr>
