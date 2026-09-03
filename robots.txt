@@ -1,0 +1,25 @@
+# studionovalem.fr : tout le monde est le bienvenu, moteurs et IA compris.
+User-agent: *
+Allow: /
+Disallow: /_src/
+
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: Applebot
+Allow: /
+
+Sitemap: https://studionovalem.fr/sitemap.xml

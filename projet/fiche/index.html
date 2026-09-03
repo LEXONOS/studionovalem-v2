@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Fiche client — Studio Novalem</title>
+<style>
+@font-face{font-family:'Anton';src:url('../../assets/fonts/anton.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'Work Sans';src:url('../../assets/fonts/worksans.woff2') format('woff2');font-weight:100 900;font-display:swap}
+:root{--bleu:#1F4FBF;--jaune:#F5C400;--chaux:#F7F5EF;--noir:#111;--gris:#6b6b66}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Work Sans',system-ui,sans-serif;background:var(--chaux);color:var(--noir);font-size:16px;line-height:1.55;padding:26px 16px 60px}
+.w{max-width:860px;margin:0 auto}
+.tag{display:inline-block;background:var(--jaune);border:2px solid var(--noir);padding:4px 12px;font-weight:700;font-size:13px;box-shadow:3px 3px 0 var(--noir);margin-bottom:14px}
+h1{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(28px,6vw,44px);line-height:1.05;word-break:break-word}
+.meta{color:var(--gris);font-size:14.5px;margin:8px 0 18px}
+.act{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.act a{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.03em;font-size:14px;text-decoration:none;color:#fff;background:var(--bleu);border:2px solid var(--noir);box-shadow:3px 3px 0 var(--noir);padding:11px 17px}
+.act a.wa{background:#25D366}.act a.ml{background:var(--noir)}
+.act a:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--noir)}
+.b{background:#fff;border:2px solid var(--noir);box-shadow:6px 6px 0 var(--noir);padding:20px 18px;margin-bottom:20px}
+.b h2{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.03em;font-size:17px;color:var(--bleu);margin-bottom:12px}
+.l{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid #efede6;font-size:15.5px}
+.l:last-child{border-bottom:0}
+.l span{flex:0 0 175px;color:var(--gris)}
+.l b{flex:1;word-break:break-word;font-weight:600}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.g a{display:block;border:2px solid var(--noir);background:#fff;box-shadow:3px 3px 0 var(--noir);text-decoration:none;color:var(--noir)}
+.g a:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--noir)}
+.g img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--chaux)}
+.g i{display:block;font-style:normal;font-size:11px;font-weight:700;padding:6px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc{display:inline-block;margin:5px 10px 5px 0;font-weight:700;font-size:14px;border:2px solid var(--noir);box-shadow:3px 3px 0 var(--noir);padding:9px 14px;text-decoration:none;color:var(--noir);background:var(--jaune)}
+.doc:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--noir)}
+.pastille{display:inline-block;width:15px;height:15px;border-radius:50%;border:2px solid var(--noir);vertical-align:-2px;margin-right:6px}
+.etat{padding:60px 20px;text-align:center;color:var(--gris)}
+.etat b{display:block;font-family:'Anton',sans-serif;text-transform:uppercase;font-size:22px;color:var(--noir);margin-bottom:8px}
+@media(max-width:560px){.l{flex-direction:column;gap:1px}.l span{flex:none;font-size:13px}}
+footer{text-align:center;color:var(--gris);font-size:13px;margin-top:30px}
+.suppr{font:inherit;font-weight:700;font-size:13px;color:#c0261f;background:none;border:2px solid #c0261f;padding:8px 14px;cursor:pointer;box-shadow:3px 3px 0 #c0261f}
+.suppr:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #c0261f}
+.suppr[disabled]{opacity:.5;cursor:wait}
+</style>
+</head>
+<body>
+<div class="w" id="app"><div class="etat"><b>Chargement…</b>Un instant, je récupère la fiche.</div></div>
+<footer>Studio Novalem — fiche client privée</footer>
+
+<script>
+var SUPABASE_URL = "https://hfdkkdyyhpymrwiqmitn.supabase.co";
+var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhmZGtrZHl5aHB5bXJ3aXFtaXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NTU3OTgsImV4cCI6MjA4OTIzMTc5OH0.UWli4BIDWHwGOKuFCom8wQFYHnNYPtODAI5Cl7tCRJ8";
+var BUCKET = "fiches-projet";
+
+function esc(t){
+  return String(t == null ? '' : t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function ligne(t, v){ return v ? '<div class="l"><span>' + t + '</span><b>' + esc(v) + '</b></div>' : ''; }
+
+var d = new URLSearchParams(location.search).get('d');
+var app = document.getElementById('app');
+
+if (!d || /[^a-z0-9._-]/i.test(d)) {
+  app.innerHTML = '<div class="etat"><b>Fiche introuvable</b>Le lien semble incomplet. Reprenez-le depuis le mail.</div>';
+} else {
+  fetch(SUPABASE_URL + '/storage/v1/object/public/' + BUCKET + '/' + d + '/donnees.json')
+    .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+    .then(afficher)
+    .catch(function(){
+      app.innerHTML = '<div class="etat"><b>Fiche introuvable</b>Le lien semble incomplet ou la fiche a été supprimée.</div>';
+    });
+}
+
+function afficher(f){
+  document.title = 'Fiche — ' + (f.nom || 'client');
+  var telJoignable = (f.contactTel || f.tel || '').replace(/\s/g, '');
+  var waNum = telJoignable.replace(/[^0-9]/g, '').replace(/^0/, '590');
+  var imgs = (f.fichiers || []).filter(function(x){ return /\.(jpe?g|png|webp|gif)$/i.test(x.lien); });
+  var docs = (f.fichiers || []).filter(function(x){ return !/\.(jpe?g|png|webp|gif)$/i.test(x.lien); });
+
+  app.innerHTML =
+    '<div class="tag">Fiche projet — Studio Novalem</div>' +
+    '<h1>' + esc(f.nom || 'Sans nom') + '</h1>' +
+    '<div class="meta">' + esc([f.metier, [f.commune, f.ile].filter(Boolean).join(', ')].filter(Boolean).join(' — ')) + ' — reçue le ' + esc(f.date) + '</div>' +
+    '<div class="act">' +
+    (telJoignable ? '<a href="tel:' + esc(telJoignable) + '">Appeler ' + esc((f.contactNom || '').split(' ')[0] || '') + '</a>' : '') +
+    (telJoignable ? '<a class="wa" target="_blank" rel="noopener" href="https://wa.me/' + esc(waNum) + '">WhatsApp</a>' : '') +
+    (f.email ? '<a class="ml" href="mailto:' + esc(f.email) + '">Email</a>' : '') +
+    '</div>' +
+
+    '<div class="b"><h2>Le commerce</h2>' +
+    ligne('Sa phrase', f.phrase) +
+    ligne('Téléphone affiché', f.tel) +
+    ligne('Email affiché', f.email) +
+    ligne('WhatsApp', f.whatsapp ? f.whatsapp + (f.waNum ? ' (' + f.waNum + ')' : '') : '') +
+    ligne('Adresse', f.adresse) +
+    ligne('Horaires', f.horaires) +
+    ligne('Instagram', f.insta) +
+    ligne('Facebook', f.fb) +
+    '</div>' +
+
+    '<div class="b"><h2>Le site</h2>' +
+    ligne('Objectifs', (f.objectifs || []).join(' / ')) +
+    (f.speciales || []).map(function(s){ return ligne(esc(s.q), s.r); }).join('') +
+    ligne('Pages', (f.pages || []).join(' / ')) +
+    ligne('Sites aimés', f.aimes) +
+    ligne('Logo', f.logo) +
+    (f.couleurs ? '<div class="l"><span>Couleurs</span><b>' + (f.couleurHex ? '<span class="pastille" style="background:' + esc(f.couleurHex) + '"></span>' : '') + esc(f.couleurs) + '</b></div>' : '') +
+    ligne('Ambiance', f.ambiance) +
+    '</div>' +
+
+    (imgs.length ? '<div class="b"><h2>Photos (' + imgs.length + ')</h2><div class="g">' +
+      imgs.map(function(x){ return '<a href="' + esc(x.lien) + '" target="_blank" rel="noopener"><img src="' + esc(x.lien) + '" alt="" loading="lazy"><i>' + esc(x.nom) + '</i></a>'; }).join('') +
+      '</div></div>' : '') +
+
+    (docs.length ? '<div class="b"><h2>Documents</h2>' +
+      docs.map(function(x){ return '<a class="doc" href="' + esc(x.lien) + '" target="_blank" rel="noopener">&#128196; ' + esc(x.nom) + '</a>'; }).join('') +
+      '</div>' : '') +
+
+    '<div class="b"><h2>Le contact</h2>' +
+    ligne('Qui', f.contactNom) +
+    ligne('Numéro direct', f.contactTel) +
+    ligne('Meilleur moment', f.moment) +
+    ligne('Son mot', f.mot) +
+    '</div>' +
+
+    '<div style="text-align:right"><button id="btn-suppr" class="suppr" type="button">Supprimer cette fiche</button></div>';
+
+  document.getElementById('btn-suppr').addEventListener('click', function(){
+    var btn = this;
+    if (!confirm('Supprimer d\u00e9finitivement cette fiche ?\nPhotos, documents et r\u00e9ponses seront effac\u00e9s de Supabase.')) return;
+    if (!confirm('Vraiment s\u00fbr ? Il n\u2019y a pas de corbeille.')) return;
+    btn.disabled = true;
+    btn.textContent = 'Suppression\u2026';
+    var chemins = (f.fichiers || []).map(function(x){
+      return decodeURIComponent(x.lien.split('/object/public/' + BUCKET + '/')[1] || '');
+    }).filter(Boolean);
+    chemins.push(d + '/donnees.json');
+    fetch(SUPABASE_URL + '/storage/v1/object/' + BUCKET, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'apikey': SUPABASE_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ prefixes: chemins })
+    }).then(function(r){
+      if (!r.ok) throw 0;
+      app.innerHTML = '<div class="etat"><b>Fiche supprim\u00e9e</b>Tout a \u00e9t\u00e9 effac\u00e9 de Supabase. Vous pouvez fermer cette page.</div>';
+    }).catch(function(){
+      btn.disabled = false;
+      btn.textContent = 'Supprimer cette fiche';
+      alert('La suppression a \u00e9t\u00e9 refus\u00e9e. V\u00e9rifiez que la policy de suppression a bien \u00e9t\u00e9 ajout\u00e9e dans Supabase (voir SQL).');
+    });
+  });
+}
+</script>
+</body>
+</html>

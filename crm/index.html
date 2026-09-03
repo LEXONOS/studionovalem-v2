@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Votre projet CRM — Studio Novalem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bleu:#1F4FBF; --jaune:#F5C400; --chaux:#F7F5EF; --noir:#111;
+  --blanc:#fff; --gris:#6b6b66;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Work Sans',sans-serif;color:var(--noir);background:var(--chaux);
+  font-size:17px;line-height:1.55;padding-bottom:120px;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px}
+
+/* ---------- Header ---------- */
+header{border-bottom:3px solid var(--noir);background:var(--blanc)}
+.head-in{max-width:760px;margin:0 auto;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.04em;text-transform:uppercase}
+.logo span{color:var(--bleu)}
+.head-tag{font-size:13px;font-weight:600;background:var(--jaune);border:2px solid var(--noir);padding:4px 10px;box-shadow:3px 3px 0 var(--noir);white-space:nowrap}
+
+/* ---------- Intro ---------- */
+.intro{padding:44px 0 26px}
+h1{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(30px,6vw,46px);line-height:1.05;letter-spacing:.01em}
+h1 em{font-style:normal;color:var(--bleu)}
+.intro p{margin-top:14px;max-width:560px}
+.intro .duree{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-weight:600;font-size:15px;background:var(--blanc);border:2px solid var(--noir);padding:6px 12px;box-shadow:4px 4px 0 var(--noir)}
+.intro .duree b{color:var(--bleu)}
+
+/* ---------- Sections ---------- */
+section.bloc{background:var(--blanc);border:2px solid var(--noir);box-shadow:6px 6px 0 var(--noir);margin:26px 0;padding:26px 22px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.sec-num{font-family:'Anton',sans-serif;font-size:18px;background:var(--jaune);border:2px solid var(--noir);width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex:none}
+h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(20px,4vw,26px);letter-spacing:.02em}
+.sec-sub{color:var(--gris);font-size:15px;margin-bottom:6px}
+
+.q{margin-top:22px}
+.q-label{font-weight:700;margin-bottom:10px;display:block}
+.q-label small{display:block;font-weight:400;color:var(--gris);font-size:14px;margin-top:2px}
+
+/* Champs texte */
+input[type=text],input[type=tel],input[type=email],textarea,select{
+  width:100%;border:2px solid var(--noir);background:var(--chaux);padding:12px 14px;
+  font:inherit;font-size:16px;border-radius:0;-webkit-appearance:none;appearance:none;
+}
+textarea{min-height:90px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:3px solid var(--jaune);outline-offset:1px}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23111' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+
+/* Chips (choix unique) */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips .chip{
+  display:inline-block;border:2px solid var(--noir);background:var(--blanc);
+  padding:9px 15px;font-weight:600;font-size:15px;box-shadow:3px 3px 0 var(--noir);
+  transition:transform .08s ease, background .08s ease;user-select:none;
+}
+.chips label:active .chip{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--noir)}
+.chips input:checked + .chip{background:var(--bleu);color:#fff}
+.chips input:focus-visible + .chip{outline:3px solid var(--jaune);outline-offset:2px}
+
+/* Cases à cocher */
+.cases{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.cases{grid-template-columns:1fr}}
+.cases label{position:relative;cursor:pointer}
+.cases input{position:absolute;opacity:0;pointer-events:none}
+.case{
+  display:flex;align-items:center;gap:10px;border:2px solid var(--noir);background:var(--blanc);
+  padding:11px 13px;font-weight:600;font-size:15px;min-height:52px;
+  box-shadow:3px 3px 0 var(--noir);transition:transform .08s ease;user-select:none;
+}
+.case::before{
+  content:"";width:20px;height:20px;flex:none;border:2px solid var(--noir);background:var(--chaux);
+}
+.cases input:checked + .case{background:#EDF1FF;border-color:var(--bleu)}
+.cases input:checked + .case::before{
+  background:var(--bleu);border-color:var(--bleu);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='11'%3E%3Cpath d='M1 5.5l4 4L13 1' stroke='%23fff' stroke-width='2.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center;
+}
+.cases input:focus-visible + .case{outline:3px solid var(--jaune);outline-offset:2px}
+.cases label:active .case{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--noir)}
+
+/* Modules avec prix */
+.cases.modules{grid-template-columns:1fr}
+.case .mod-txt{flex:1}
+.case .mod-txt small{display:block;font-weight:400;color:var(--gris);font-size:13px}
+.case .mod-prix{font-family:'Anton',sans-serif;font-size:15px;color:var(--bleu);white-space:nowrap}
+.inclus{
+  display:flex;align-items:center;gap:10px;border:2px solid var(--noir);background:var(--jaune);
+  padding:11px 13px;font-weight:700;font-size:15px;box-shadow:3px 3px 0 var(--noir);margin-bottom:10px;
+}
+.inclus small{display:block;font-weight:500;font-size:13px}
+.inclus .tag{font-family:'Anton',sans-serif;background:var(--noir);color:var(--jaune);padding:2px 8px;font-size:13px;white-space:nowrap;margin-left:auto}
+
+.champ-autre{margin-top:10px;display:none}
+.champ-autre.on{display:block}
+
+/* ---------- Barre du bas ---------- */
+.barre{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:var(--noir);color:#fff;border-top:3px solid var(--noir);
+}
+.barre-in{max-width:760px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:14px}
+.barre .prog{flex:1;min-width:0}
+.barre .prog .p-txt{font-size:12.5px;font-weight:600;opacity:.85;margin-bottom:5px}
+.barre .prog .p-rail{height:8px;background:#3a3a36;border:1px solid #000}
+.barre .prog .p-fill{height:100%;width:0;background:var(--jaune);transition:width .25s ease}
+.barre .esti{text-align:right}
+.barre .esti .e-lbl{font-size:11.5px;font-weight:600;opacity:.8;text-transform:uppercase;letter-spacing:.05em}
+.barre .esti .e-val{font-family:'Anton',sans-serif;font-size:24px;color:var(--jaune);line-height:1.1}
+.btn-envoi{
+  font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.03em;
+  background:var(--bleu);color:#fff;border:2px solid #fff;box-shadow:3px 3px 0 rgba(255,255,255,.35);
+  padding:12px 18px;font-size:16px;cursor:pointer;white-space:nowrap;
+}
+.btn-envoi:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(255,255,255,.35)}
+@media (max-width:560px){
+  .barre-in{flex-wrap:wrap;gap:8px;padding:10px 14px}
+  .barre .prog{order:3;width:100%;flex:none}
+  .barre .esti{order:1;text-align:left;flex:1}
+  .btn-envoi{order:2;padding:11px 14px;font-size:15px}
+}
+
+/* Note estimation */
+.note-esti{font-size:13.5px;color:var(--gris);margin-top:14px}
+
+/* ---------- Fin / modale ---------- */
+.voile{position:fixed;inset:0;background:rgba(17,17,17,.75);z-index:80;display:none;align-items:center;justify-content:center;padding:18px}
+.voile.on{display:flex}
+.modale{background:var(--blanc);border:2px solid var(--noir);box-shadow:8px 8px 0 var(--noir);max-width:560px;width:100%;max-height:85vh;overflow:auto;padding:26px 22px}
+.modale h3{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:24px;margin-bottom:10px}
+.modale h3 span{color:var(--bleu)}
+.modale p{margin-bottom:14px}
+.modale .recap-box{background:var(--chaux);border:2px solid var(--noir);padding:12px;font-size:13px;white-space:pre-wrap;max-height:220px;overflow:auto;margin-bottom:14px;font-family:ui-monospace,monospace}
+.modale .m-btns{display:flex;flex-wrap:wrap;gap:10px}
+.m-btn{font-family:'Anton',sans-serif;text-transform:uppercase;border:2px solid var(--noir);box-shadow:3px 3px 0 var(--noir);padding:10px 16px;font-size:14px;cursor:pointer;background:var(--blanc);color:var(--noir);text-decoration:none;display:inline-block}
+.m-btn.bleu{background:var(--bleu);color:#fff}
+.m-btn.jaune{background:var(--jaune)}
+.m-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--noir)}
+.merci-ico{font-size:44px;line-height:1;margin-bottom:8px}
+.err{border-color:#c0261f !important;outline:3px solid #f5b6b3}
+
+footer{padding:30px 0 10px;text-align:center;color:var(--gris);font-size:13.5px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <div class="logo">Studio <span>Novalem</span></div>
+    <div class="head-tag">Fiche projet CRM</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="intro">
+    <h1>Construisons <em>votre</em> CRM.</h1>
+    <p>Un CRM, c'est votre outil de gestion sur mesure : vos clients, vos ventes, vos rappels, vos documents, tout au même endroit. Pour qu'il colle parfaitement à votre façon de travailler, j'ai besoin de vous connaître un peu. Cochez, c'est tout.</p>
+    <div class="duree">&#9201;&#65039; <span><b>10 minutes</b>, montre en main</span></div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <section class="bloc" data-sec="Votre entreprise">
+    <div class="sec-head"><div class="sec-num">1</div><h2>Votre entreprise</h2></div>
+    <p class="sec-sub">Pour comprendre votre univers.</p>
+
+    <div class="q" data-label="Nom de l'entreprise">
+      <label class="q-label" for="ent-nom">Le nom de votre entreprise</label>
+      <input type="text" id="ent-nom" data-req placeholder="Ex : Garage Antilles Auto">
+    </div>
+
+    <div class="q" data-label="Secteur d'activité">
+      <label class="q-label" for="ent-secteur">Votre secteur d'activité</label>
+      <select id="ent-secteur">
+        <option value="">Choisissez…</option>
+        <option>Restauration</option>
+        <option>Commerce / boutique</option>
+        <option>Artisanat / BTP</option>
+        <option>Beauté / bien-être</option>
+        <option>Santé</option>
+        <option>Immobilier</option>
+        <option>Location (véhicules, bateaux, matériel…)</option>
+        <option>Tourisme / loisirs</option>
+        <option>Services aux entreprises</option>
+        <option value="Autre">Autre</option>
+      </select>
+      <input type="text" id="ent-secteur-autre-visible" class="champ-autre" placeholder="Précisez votre secteur">
+    </div>
+
+    <div class="q" data-label="Nombre d'utilisateurs du CRM">
+      <span class="q-label">Combien de personnes utiliseront le CRM ?</span>
+      <div class="chips">
+        <label><input type="radio" name="ent-users" value="Moi seul"><span class="chip">Moi seul</span></label>
+        <label><input type="radio" name="ent-users" value="2 à 5 personnes"><span class="chip">2 à 5</span></label>
+        <label><input type="radio" name="ent-users" value="Plus de 5 personnes"><span class="chip">Plus de 5</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-label="Aisance avec l'informatique">
+      <span class="q-label">Avec l'informatique, vous êtes…
+        <small>Ça m'aide à doser la simplicité de l'outil.</small>
+      </span>
+      <div class="chips">
+        <label><input type="radio" name="ent-aise" value="Pas très à l'aise, il me faut très simple"><span class="chip">Pas trop, il me faut très simple</span></label>
+        <label><input type="radio" name="ent-aise" value="À l'aise"><span class="chip">Ça va</span></label>
+        <label><input type="radio" name="ent-aise" value="Très à l'aise"><span class="chip">Très à l'aise</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="bloc" data-sec="Vos clients">
+    <div class="sec-head"><div class="sec-num">2</div><h2>Vos clients</h2></div>
+    <p class="sec-sub">D'où ils viennent, où sont leurs infos aujourd'hui.</p>
+
+    <div class="q" data-label="Type de clients">
+      <span class="q-label">Vous vendez plutôt à…</span>
+      <div class="chips">
+        <label><input type="radio" name="cli-type" value="Des particuliers"><span class="chip">Des particuliers</span></label>
+        <label><input type="radio" name="cli-type" value="Des professionnels"><span class="chip">Des professionnels</span></label>
+        <label><input type="radio" name="cli-type" value="Les deux"><span class="chip">Les deux</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-label="Comment arrivent les clients">
+      <span class="q-label">Comment vos clients arrivent-ils jusqu'à vous ?
+        <small>Cochez tout ce qui compte.</small>
+      </span>
+      <div class="cases">
+        <label><input type="checkbox" value="On m'appelle"><span class="case">On m'appelle</span></label>
+        <label><input type="checkbox" value="WhatsApp"><span class="case">WhatsApp</span></label>
+        <label><input type="checkbox" value="Instagram / Facebook"><span class="case">Instagram / Facebook</span></label>
+        <label><input type="checkbox" value="Mon site internet"><span class="case">Mon site internet</span></label>
+        <label><input type="checkbox" value="Bouche à oreille"><span class="case">Bouche à oreille</span></label>
+        <label><input type="checkbox" value="Je prospecte moi-même"><span class="case">Je prospecte moi-même</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-label="Nouveaux contacts par mois">
+      <span class="q-label">De nouveaux contacts, vous en avez environ…</span>
+      <div class="chips">
+        <label><input type="radio" name="cli-vol" value="Moins de 10 par mois"><span class="chip">Moins de 10 / mois</span></label>
+        <label><input type="radio" name="cli-vol" value="10 à 50 par mois"><span class="chip">10 à 50 / mois</span></label>
+        <label><input type="radio" name="cli-vol" value="50 à 200 par mois"><span class="chip">50 à 200 / mois</span></label>
+        <label><input type="radio" name="cli-vol" value="Plus de 200 par mois"><span class="chip">Plus de 200 / mois</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-label="Où sont les infos clients aujourd'hui">
+      <span class="q-label">Aujourd'hui, les infos de vos clients sont où ?</span>
+      <div class="cases">
+        <label><input type="checkbox" value="Dans ma tête"><span class="case">Dans ma tête</span></label>
+        <label><input type="checkbox" value="Cahier / papier"><span class="case">Cahier / papier</span></label>
+        <label><input type="checkbox" value="Excel ou Google Sheets"><span class="case">Excel / Google Sheets</span></label>
+        <label><input type="checkbox" value="Dans mon téléphone (contacts, WhatsApp)"><span class="case">Dans mon téléphone</span></label>
+        <label><input type="checkbox" value="Un logiciel" data-autre="#cli-logiciel"><span class="case">Un logiciel</span></label>
+      </div>
+      <input type="text" id="cli-logiciel" class="champ-autre" placeholder="Lequel ?">
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="bloc" data-sec="Votre façon de vendre">
+    <div class="sec-head"><div class="sec-num">3</div><h2>Votre façon de vendre</h2></div>
+    <p class="sec-sub">Le chemin qu'un client parcourt chez vous.</p>
+
+    <div class="q" data-label="Étapes du parcours client">
+      <span class="q-label">En général, un client passe par ces étapes :
+        <small>Cochez celles qui existent chez vous, dans l'ordre ça donne votre pipeline.</small>
+      </span>
+      <div class="cases">
+        <label><input type="checkbox" value="Premier contact"><span class="case">Premier contact</span></label>
+        <label><input type="checkbox" value="Rendez-vous ou visite"><span class="case">Rendez-vous / visite</span></label>
+        <label><input type="checkbox" value="Devis envoyé"><span class="case">Devis envoyé</span></label>
+        <label><input type="checkbox" value="Négociation / relances"><span class="case">Négociation / relances</span></label>
+        <label><input type="checkbox" value="Vente conclue"><span class="case">Vente conclue</span></label>
+        <label><input type="checkbox" value="Livraison / prestation"><span class="case">Livraison / prestation</span></label>
+        <label><input type="checkbox" value="Suivi après-vente"><span class="case">Suivi après-vente</span></label>
+        <label><input type="checkbox" value="Autre étape" data-autre="#vente-etape-autre"><span class="case">Autre étape</span></label>
+      </div>
+      <input type="text" id="vente-etape-autre" class="champ-autre" placeholder="Laquelle ?">
+    </div>
+
+    <div class="q" data-label="Durée entre premier contact et vente">
+      <span class="q-label">Entre le premier contact et la vente, il se passe…</span>
+      <div class="chips">
+        <label><input type="radio" name="vente-duree" value="Moins d'une semaine"><span class="chip">Moins d'une semaine</span></label>
+        <label><input type="radio" name="vente-duree" value="1 à 4 semaines"><span class="chip">1 à 4 semaines</span></label>
+        <label><input type="radio" name="vente-duree" value="Plusieurs mois"><span class="chip">Plusieurs mois</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-label="Ce qui fait perdre du temps ou des clients">
+      <span class="q-label">Et honnêtement, qu'est-ce qui vous fait perdre du temps ou des clients ?
+        <small>C'est là que le CRM va frapper fort.</small>
+      </span>
+      <div class="cases">
+        <label><input type="checkbox" value="J'oublie de relancer"><span class="case">J'oublie de relancer</span></label>
+        <label><input type="checkbox" value="Les infos sont éparpillées"><span class="case">Infos éparpillées partout</span></label>
+        <label><input type="checkbox" value="Faire les devis me prend trop de temps"><span class="case">Les devis, trop longs à faire</span></label>
+        <label><input type="checkbox" value="Je perds la trace de certains clients"><span class="case">Je perds la trace de clients</span></label>
+        <label><input type="checkbox" value="Trop de saisie et de paperasse"><span class="case">Trop de paperasse</span></label>
+        <label><input type="checkbox" value="Rien de spécial"><span class="case">Rien de spécial</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section class="bloc" data-sec="Ce que votre CRM doit faire">
+    <div class="sec-head"><div class="sec-num">4</div><h2>Ce que votre CRM doit faire</h2></div>
+    <p class="sec-sub">Cochez ce qu'il vous faut. L'estimation en bas se met à jour toute seule.</p>
+
+    <div class="inclus">
+      <span>Fiches clients, historique, notes, recherche<small>Le cœur du CRM, toujours compris.</small></span>
+      <span class="tag">Inclus</span>
+    </div>
+
+    <div class="q" data-label="Modules souhaités">
+      <div class="cases modules">
+        <label><input type="checkbox" value="Pipeline visuel" data-prix="90"><span class="case"><span class="mod-txt">Pipeline visuel<small>Vos clients classés par étape, d'un coup d'œil</small></span><span class="mod-prix">+ 90 €</span></span></label>
+        <label><input type="checkbox" value="Agenda et rappels automatiques" data-prix="120"><span class="case"><span class="mod-txt">Agenda + rappels automatiques<small>Plus jamais un client oublié</small></span><span class="mod-prix">+ 120 €</span></span></label>
+        <label><input type="checkbox" value="Création de devis" data-prix="150"><span class="case"><span class="mod-txt">Création de devis<small>Devis pro généré et prêt à envoyer en 2 minutes</small></span><span class="mod-prix">+ 150 €</span></span></label>
+        <label><input type="checkbox" value="Création de factures" data-prix="150"><span class="case"><span class="mod-txt">Création de factures<small>Numérotées, propres, imprimables en PDF</small></span><span class="mod-prix">+ 150 €</span></span></label>
+        <label><input type="checkbox" value="Relances automatiques (mail ou WhatsApp)" data-prix="190"><span class="case"><span class="mod-txt">Relances automatiques<small>Le CRM relance par mail ou WhatsApp à votre place</small></span><span class="mod-prix">+ 190 €</span></span></label>
+        <label><input type="checkbox" value="Envoi d'emails depuis le CRM" data-prix="120"><span class="case"><span class="mod-txt">Envoi d'emails intégré<small>Écrire et envoyer sans changer d'outil</small></span><span class="mod-prix">+ 120 €</span></span></label>
+        <label><input type="checkbox" value="Statistiques et chiffre d'affaires" data-prix="120"><span class="case"><span class="mod-txt">Statistiques &amp; chiffre d'affaires<small>Votre activité en chiffres clairs</small></span><span class="mod-prix">+ 120 €</span></span></label>
+        <label><input type="checkbox" value="Catalogue produits / gestion de stock" data-prix="190"><span class="case"><span class="mod-txt">Produits &amp; stock<small>Votre catalogue et vos quantités à jour</small></span><span class="mod-prix">+ 190 €</span></span></label>
+        <label><input type="checkbox" value="Prise de rendez-vous en ligne par les clients" data-prix="190"><span class="case"><span class="mod-txt">Prise de RDV en ligne<small>Vos clients réservent seuls sur vos créneaux</small></span><span class="mod-prix">+ 190 €</span></span></label>
+        <label><input type="checkbox" value="Plusieurs comptes avec rôles différents" data-prix="150"><span class="case"><span class="mod-txt">Comptes équipe avec rôles<small>Chacun son accès, chacun ses droits</small></span><span class="mod-prix">+ 150 €</span></span></label>
+        <label><input type="checkbox" value="Récupération des données existantes" data-prix="90"><span class="case"><span class="mod-txt">Récupération de vos données<small>On importe votre Excel, vos contacts, votre existant</small></span><span class="mod-prix">+ 90 €</span></span></label>
+      </div>
+    </div>
+
+    <div class="q" data-label="Autre besoin particulier">
+      <label class="q-label" for="mod-autre">Un besoin qui n'est pas dans la liste ?</label>
+      <textarea id="mod-autre" placeholder="Ex : suivre les véhicules en réparation, gérer des contrats de location…"></textarea>
+    </div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section class="bloc" data-sec="Vos outils actuels">
+    <div class="sec-head"><div class="sec-num">5</div><h2>Vos outils actuels</h2></div>
+    <p class="sec-sub">Pour que le CRM s'intègre à ce que vous utilisez déjà.</p>
+
+    <div class="q" data-label="Outils utilisés au quotidien">
+      <span class="q-label">Au quotidien, vous utilisez…</span>
+      <div class="cases">
+        <label><input type="checkbox" value="Excel / Google Sheets"><span class="case">Excel / Google Sheets</span></label>
+        <label><input type="checkbox" value="Gmail ou Outlook"><span class="case">Gmail ou Outlook</span></label>
+        <label><input type="checkbox" value="WhatsApp Business"><span class="case">WhatsApp Business</span></label>
+        <label><input type="checkbox" value="Instagram / Facebook"><span class="case">Instagram / Facebook</span></label>
+        <label><input type="checkbox" value="Agenda Google"><span class="case">Agenda Google</span></label>
+        <label><input type="checkbox" value="Un logiciel de facturation ou compta" data-autre="#outil-compta"><span class="case">Logiciel de facturation / compta</span></label>
+      </div>
+      <input type="text" id="outil-compta" class="champ-autre" placeholder="Lequel ? (Indy, Pennylane, Sage…)">
+    </div>
+
+    <div class="q" data-label="Outil à garder ou remplacer absolument">
+      <label class="q-label" for="outil-clef">Y en a-t-il un que le CRM doit absolument garder à côté, ou remplacer ?</label>
+      <input type="text" id="outil-clef" placeholder="Ex : je garde Indy pour la compta, le CRM remplace mon Excel">
+    </div>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section class="bloc" data-sec="Pour finir">
+    <div class="sec-head"><div class="sec-num">6</div><h2>Pour finir</h2></div>
+    <p class="sec-sub">Le côté pratique, et on se rappelle.</p>
+
+    <div class="q" data-label="Appareil principal">
+      <span class="q-label">Vous utiliserez le CRM surtout sur…</span>
+      <div class="chips">
+        <label><input type="radio" name="fin-appareil" value="Ordinateur"><span class="chip">Ordinateur</span></label>
+        <label><input type="radio" name="fin-appareil" value="Téléphone"><span class="chip">Téléphone</span></label>
+        <label><input type="radio" name="fin-appareil" value="Les deux"><span class="chip">Les deux</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-label="Échéance souhaitée">
+      <span class="q-label">Vous le voulez pour…</span>
+      <div class="chips">
+        <label><input type="radio" name="fin-delai" value="Dès que possible"><span class="chip">Dès que possible</span></label>
+        <label><input type="radio" name="fin-delai" value="D'ici 1 mois"><span class="chip">D'ici 1 mois</span></label>
+        <label><input type="radio" name="fin-delai" value="D'ici 3 mois"><span class="chip">D'ici 3 mois</span></label>
+        <label><input type="radio" name="fin-delai" value="Pas pressé"><span class="chip">Pas pressé</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-label="Budget envisagé">
+      <span class="q-label">Le budget que vous aviez en tête <small>Optionnel, mais ça aide à bien vous conseiller.</small></span>
+      <div class="chips">
+        <label><input type="radio" name="fin-budget" value="Moins de 1 000 €"><span class="chip">Moins de 1 000 €</span></label>
+        <label><input type="radio" name="fin-budget" value="1 000 à 2 000 €"><span class="chip">1 000 à 2 000 €</span></label>
+        <label><input type="radio" name="fin-budget" value="Plus de 2 000 €"><span class="chip">Plus de 2 000 €</span></label>
+        <label><input type="radio" name="fin-budget" value="Je ne sais pas encore"><span class="chip">Je ne sais pas encore</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-label="Votre nom">
+      <label class="q-label" for="fin-nom">Votre nom</label>
+      <input type="text" id="fin-nom" data-req placeholder="Prénom et nom">
+    </div>
+
+    <div class="q" data-label="Téléphone / WhatsApp">
+      <label class="q-label" for="fin-tel">Votre téléphone ou WhatsApp</label>
+      <input type="tel" id="fin-tel" data-req placeholder="Ex : 0690 12 34 56">
+    </div>
+
+    <div class="q" data-label="Email">
+      <label class="q-label" for="fin-mail">Votre email <small>Optionnel</small></label>
+      <input type="email" id="fin-mail" placeholder="vous@exemple.fr">
+    </div>
+
+    <div class="q" data-label="Autre chose à dire">
+      <label class="q-label" for="fin-libre">Quelque chose d'autre à me dire ?</label>
+      <textarea id="fin-libre" placeholder="Tout ce qui vous passe par la tête sur ce projet."></textarea>
+    </div>
+
+    <p class="note-esti">L'estimation en bas est indicative : elle vous donne un ordre de grandeur immédiat. Le prix exact est confirmé ensemble au rendez-vous, avant tout engagement.</p>
+  </section>
+
+  <footer>Studio Novalem — Création de sites &amp; outils sur mesure aux Antilles<br>studionovalem.fr</footer>
+</div>
+
+<!-- Barre estimation + envoi -->
+<div class="barre">
+  <div class="barre-in">
+    <div class="esti">
+      <div class="e-lbl">Estimation</div>
+      <div class="e-val" id="esti-val">890 €</div>
+    </div>
+    <div class="prog">
+      <div class="p-txt" id="prog-txt">0 réponse sur 20</div>
+      <div class="p-rail"><div class="p-fill" id="prog-fill"></div></div>
+    </div>
+    <button class="btn-envoi" id="btn-envoi" type="button">Envoyer mes réponses</button>
+  </div>
+</div>
+
+<!-- Modale envoi / merci -->
+<div class="voile" id="voile">
+  <div class="modale" id="modale"></div>
+</div>
+
+<script>
+/* =====================================================
+   RÉGLAGES — modifiables sans toucher au reste
+   ===================================================== */
+var CONFIG = {
+  // Adresse qui reçoit les réponses (FormSubmit doit être activé une fois :
+  // le tout premier envoi déclenche un mail de confirmation à cliquer).
+  EMAIL: "contact@studionovalem.fr",
+  // Prix de base du CRM (fiches clients, historique, notes, recherche)
+  BASE: 890
+};
+/* Les prix des modules se règlent directement dans le HTML,
+   attribut data-prix de chaque case de la section 4. */
+
+/* ---------- Champs "autre" qui s'ouvrent ---------- */
+document.querySelectorAll('[data-autre]').forEach(function(el){
+  var cible = document.querySelector(el.getAttribute('data-autre'));
+  if(!cible) return;
+  function maj(){
+    var ouvert = el.tagName === 'SELECT' ? el.value === 'Autre' : el.checked;
+    cible.classList.toggle('on', ouvert);
+    if(ouvert) cible.focus();
+  }
+  el.addEventListener('change', maj);
+});
+/* Cas particulier du select secteur (champ visible dédié) */
+(function(){
+  var sel = document.getElementById('ent-secteur');
+  var champ = document.getElementById('ent-secteur-autre-visible');
+  sel.addEventListener('change', function(){
+    champ.classList.toggle('on', sel.value === 'Autre');
+    if(sel.value === 'Autre') champ.focus();
+  });
+})();
+
+/* ---------- Estimation en direct ---------- */
+function calcEstimation(){
+  var total = CONFIG.BASE;
+  document.querySelectorAll('input[data-prix]:checked').forEach(function(c){
+    total += parseInt(c.getAttribute('data-prix'), 10) || 0;
+  });
+  return total;
+}
+function majEstimation(){
+  var v = calcEstimation();
+  document.getElementById('esti-val').textContent = v.toLocaleString('fr-FR') + ' €';
+}
+
+/* ---------- Progression ---------- */
+var blocsQ = Array.prototype.slice.call(document.querySelectorAll('.q'));
+function qRemplie(q){
+  var ok = false;
+  q.querySelectorAll('input, textarea, select').forEach(function(el){
+    if(el.type === 'checkbox' || el.type === 'radio'){ if(el.checked) ok = true; }
+    else if(el.value && el.value.trim() !== '') ok = true;
+  });
+  return ok;
+}
+function majProgression(){
+  var n = blocsQ.filter(qRemplie).length;
+  var total = blocsQ.length;
+  document.getElementById('prog-txt').textContent = n + (n > 1 ? ' réponses' : ' réponse') + ' sur ' + total;
+  document.getElementById('prog-fill').style.width = Math.round(n / total * 100) + '%';
+}
+document.addEventListener('change', function(){ majEstimation(); majProgression(); });
+document.addEventListener('input', majProgression);
+majEstimation(); majProgression();
+
+/* ---------- Construction du récapitulatif ---------- */
+function construireRecap(){
+  var lignes = [];
+  lignes.push('FICHE PROJET CRM — STUDIO NOVALEM');
+  lignes.push('Reçue le ' + new Date().toLocaleDateString('fr-FR') + ' à ' + new Date().toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'}));
+  lignes.push('');
+  document.querySelectorAll('section.bloc').forEach(function(sec){
+    lignes.push('=== ' + sec.getAttribute('data-sec').toUpperCase() + ' ===');
+    sec.querySelectorAll('.q').forEach(function(q){
+      var label = q.getAttribute('data-label');
+      var reponses = [];
+      q.querySelectorAll('input, textarea, select').forEach(function(el){
+        if(el.type === 'checkbox' || el.type === 'radio'){
+          if(el.checked) reponses.push(el.value);
+        } else if(el.value && el.value.trim() !== ''){
+          reponses.push(el.value.trim());
+        }
+      });
+      if(reponses.length) lignes.push('- ' + label + ' : ' + reponses.join(' | '));
+    });
+    lignes.push('');
+  });
+  lignes.push('=== ESTIMATION INDICATIVE ===');
+  lignes.push('Base CRM (fiches clients, historique, notes) : ' + CONFIG.BASE + ' €');
+  document.querySelectorAll('input[data-prix]:checked').forEach(function(c){
+    lignes.push('+ ' + c.value + ' : ' + c.getAttribute('data-prix') + ' €');
+  });
+  lignes.push('TOTAL ESTIMÉ : ' + calcEstimation().toLocaleString('fr-FR') + ' € (à confirmer au rendez-vous)');
+  return lignes.join('\n');
+}
+
+/* ---------- Envoi ---------- */
+var voile = document.getElementById('voile');
+var modale = document.getElementById('modale');
+
+function champsObligatoiresOk(){
+  var ok = true, premier = null;
+  document.querySelectorAll('[data-req]').forEach(function(el){
+    el.classList.remove('err');
+    if(!el.value || el.value.trim() === ''){
+      el.classList.add('err');
+      ok = false;
+      if(!premier) premier = el;
+    }
+  });
+  if(premier){
+    premier.scrollIntoView({behavior:'smooth', block:'center'});
+    setTimeout(function(){ premier.focus(); }, 400);
+  }
+  return ok;
+}
+
+function ecranMerci(){
+  modale.innerHTML =
+    '<div class="merci-ico">&#127881;</div>' +
+    '<h3>C\'est <span>envoyé</span> !</h3>' +
+    '<p>Merci, j\'ai bien reçu votre fiche. Je l\'étudie et je reviens vers vous très vite pour caler un rendez-vous et affiner votre CRM ensemble.</p>' +
+    '<p style="font-weight:600">Louis — Studio Novalem</p>' +
+    '<div class="m-btns"><button class="m-btn jaune" onclick="document.getElementById(\'voile\').classList.remove(\'on\')">Fermer</button></div>';
+  voile.classList.add('on');
+}
+
+function ecranSecours(recap){
+  modale.innerHTML =
+    '<h3>Presque <span>fini</span></h3>' +
+    '<p>L\'envoi automatique n\'est pas passé (connexion capricieuse, ça arrive). Vos réponses sont prêtes juste en dessous : envoyez-les moi en un clic.</p>' +
+    '<div class="recap-box" id="recap-box"></div>' +
+    '<div class="m-btns">' +
+      '<a class="m-btn bleu" id="btn-mailto" href="#">Envoyer par email</a>' +
+      '<button class="m-btn jaune" id="btn-copier">Copier le texte</button>' +
+      '<button class="m-btn" id="btn-telecharger">Télécharger</button>' +
+    '</div>';
+  document.getElementById('recap-box').textContent = recap;
+  document.getElementById('btn-mailto').href =
+    'mailto:' + CONFIG.EMAIL +
+    '?subject=' + encodeURIComponent('Fiche projet CRM — ' + (document.getElementById('ent-nom').value || 'nouveau client')) +
+    '&body=' + encodeURIComponent(recap);
+  document.getElementById('btn-copier').addEventListener('click', function(){
+    var btn = this;
+    navigator.clipboard.writeText(recap).then(function(){
+      btn.textContent = 'Copié !';
+      setTimeout(function(){ btn.textContent = 'Copier le texte'; }, 1800);
+    });
+  });
+  document.getElementById('btn-telecharger').addEventListener('click', function(){
+    var blob = new Blob([recap], {type:'text/plain;charset=utf-8'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'fiche-projet-crm.txt';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+  voile.classList.add('on');
+}
+
+document.getElementById('btn-envoi').addEventListener('click', function(){
+  if(!champsObligatoiresOk()) return;
+  var btn = this;
+  btn.disabled = true;
+  btn.textContent = 'Envoi…';
+  var recap = construireRecap();
+
+  fetch('https://formsubmit.co/ajax/' + CONFIG.EMAIL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+    body: JSON.stringify({
+      _captcha: 'false',
+      _subject: 'Fiche projet CRM — ' + (document.getElementById('ent-nom').value || 'nouveau client'),
+      _template: 'box',
+      entreprise: document.getElementById('ent-nom').value,
+      contact: document.getElementById('fin-nom').value + ' / ' + document.getElementById('fin-tel').value,
+      fiche: recap
+    })
+  }).then(function(r){
+    if(!r.ok) throw new Error('envoi refusé');
+    return r.json();
+  }).then(function(){
+    ecranMerci();
+  }).catch(function(){
+    ecranSecours(recap);
+  }).finally(function(){
+    btn.disabled = false;
+    btn.textContent = 'Envoyer mes réponses';
+  });
+});
+
+voile.addEventListener('click', function(e){
+  if(e.target === voile) voile.classList.remove('on');
+});
+</script>
+</body>
+</html>

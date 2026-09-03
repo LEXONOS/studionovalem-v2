@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Préparons votre site — Studio Novalem</title>
+<style>
+@font-face{font-family:'Anton';src:url('../assets/fonts/anton.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'Work Sans';src:url('../assets/fonts/worksans.woff2') format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:'Work Sans';src:url('../assets/fonts/worksans-italic.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap}
+:root{
+  --bleu:#1F4FBF; --jaune:#F5C400; --chaux:#F7F5EF; --noir:#111;
+  --blanc:#fff; --gris:#6b6b66; --bleu-clair:#E7EDFB;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Work Sans',system-ui,sans-serif;color:var(--noir);background:var(--chaux);
+  font-size:17px;line-height:1.55;padding-bottom:120px;
+}
+
+/* ---------- Layout : formulaire + téléphone ---------- */
+.page{max-width:760px;margin:0 auto;padding:0 18px}
+@media (min-width:1120px){
+  .page{max-width:1180px;display:grid;grid-template-columns:minmax(0,720px) 360px;gap:44px;align-items:start}
+}
+.colform{min-width:0}
+
+/* ---------- Header ---------- */
+header{border-bottom:3px solid var(--noir);background:var(--blanc)}
+.head-in{max-width:1180px;margin:0 auto;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.04em;text-transform:uppercase}
+.logo a{color:inherit;text-decoration:none}
+.logo span{color:var(--bleu)}
+.head-tag{font-size:13px;font-weight:600;background:var(--jaune);border:2px solid var(--noir);padding:4px 10px;box-shadow:3px 3px 0 var(--noir);white-space:nowrap}
+
+/* ---------- Intro ---------- */
+.intro{padding:40px 0 22px;position:relative}
+h1{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(30px,6vw,46px);line-height:1.05;letter-spacing:.01em}
+h1 em{font-style:normal;color:var(--bleu)}
+.intro p{margin-top:14px;max-width:540px}
+.intro .duree{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-weight:600;font-size:15px;background:var(--blanc);border:2px solid var(--noir);padding:6px 12px;box-shadow:4px 4px 0 var(--noir)}
+.intro .duree b{color:var(--bleu)}
+.intro-nono{position:absolute;right:-6px;top:26px;width:118px;pointer-events:none}
+@media (max-width:700px){.intro-nono{display:none}}
+
+/* ---------- Sections ---------- */
+section.bloc{background:var(--blanc);border:2px solid var(--noir);box-shadow:6px 6px 0 var(--noir);margin:26px 0;padding:26px 22px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.sec-num{font-family:'Anton',sans-serif;font-size:18px;background:var(--jaune);border:2px solid var(--noir);width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex:none}
+h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(20px,4vw,26px);letter-spacing:.02em}
+.sec-sub{color:var(--gris);font-size:15px;margin-bottom:6px}
+
+.q{margin-top:22px}
+.q-label{font-weight:700;margin-bottom:10px;display:block}
+.q-label small{display:block;font-weight:400;color:var(--gris);font-size:14px;margin-top:2px}
+.hide{display:none !important}
+
+input[type=text],input[type=tel],input[type=email],input[type=url],textarea,select{
+  width:100%;border:2px solid var(--noir);background:var(--chaux);padding:12px 14px;
+  font:inherit;font-size:16px;border-radius:0;-webkit-appearance:none;appearance:none;
+}
+textarea{min-height:84px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:3px solid var(--jaune);outline-offset:1px}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23111' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+.deux{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.deux{grid-template-columns:1fr}}
+
+/* ---------- Grille métiers ---------- */
+.metiers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:560px){.metiers{grid-template-columns:repeat(2,1fr)}}
+.metiers button{
+  font:inherit;font-weight:700;font-size:14.5px;border:2px solid var(--noir);background:var(--blanc);
+  padding:12px 8px;cursor:pointer;box-shadow:3px 3px 0 var(--noir);display:flex;flex-direction:column;
+  align-items:center;gap:6px;transition:transform .08s ease,background .12s ease;line-height:1.2;text-align:center;
+}
+.metiers button .mi{font-size:24px;line-height:1}
+.metiers button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--noir)}
+.metiers button.on{background:var(--bleu);color:#fff;animation:pick .28s cubic-bezier(0.34,1.56,0.64,1)}
+.metiers button:focus-visible{outline:3px solid var(--jaune);outline-offset:2px}
+@keyframes pick{0%{transform:scale(.94)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+/* ---------- Chips ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips .chip{
+  display:inline-block;border:2px solid var(--noir);background:var(--blanc);
+  padding:9px 15px;font-weight:600;font-size:15px;box-shadow:3px 3px 0 var(--noir);
+  transition:transform .08s ease, background .08s ease;user-select:none;
+}
+.chips label:active .chip{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--noir)}
+.chips input:checked + .chip{background:var(--bleu);color:#fff}
+.chips input:focus-visible + .chip{outline:3px solid var(--jaune);outline-offset:2px}
+
+/* ---------- Cases ---------- */
+.cases{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.cases{grid-template-columns:1fr}}
+.cases label{position:relative;cursor:pointer}
+.cases input{position:absolute;opacity:0;pointer-events:none}
+.case{
+  display:flex;align-items:center;gap:10px;border:2px solid var(--noir);background:var(--blanc);
+  padding:11px 13px;font-weight:600;font-size:15px;min-height:52px;
+  box-shadow:3px 3px 0 var(--noir);transition:transform .08s ease;user-select:none;
+}
+.case::before{content:"";width:20px;height:20px;flex:none;border:2px solid var(--noir);background:var(--chaux)}
+.cases input:checked + .case{background:#EDF1FF;border-color:var(--bleu)}
+.cases input:checked + .case::before{
+  background:var(--bleu);border-color:var(--bleu);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='11'%3E%3Cpath d='M1 5.5l4 4L13 1' stroke='%23fff' stroke-width='2.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center;
+}
+.cases input:focus-visible + .case{outline:3px solid var(--jaune);outline-offset:2px}
+.cases label:active .case{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--noir)}
+.champ-autre{margin-top:10px;display:none}
+.champ-autre.on{display:block}
+
+/* ---------- Couleurs ---------- */
+.pals{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:560px){.pals{grid-template-columns:repeat(3,1fr)}}
+.pals button{
+  font:inherit;border:2px solid var(--noir);background:var(--blanc);cursor:pointer;
+  padding:10px 8px 8px;box-shadow:3px 3px 0 var(--noir);display:flex;flex-direction:column;gap:7px;align-items:center;
+  font-weight:600;font-size:12.5px;transition:transform .08s ease;line-height:1.15;text-align:center;
+}
+.pals button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--noir)}
+.pals button.on{outline:3px solid var(--jaune);outline-offset:2px;background:#FFFDF2}
+.pals button:focus-visible{outline:3px solid var(--jaune);outline-offset:2px}
+.pal-dots{display:flex}
+.pal-dots i{width:22px;height:22px;border-radius:50%;border:2px solid var(--noir);margin-left:-6px}
+.pal-dots i:first-child{margin-left:0}
+.pal-custom{display:flex;align-items:center;gap:10px;margin-top:12px}
+.pal-custom input[type=color]{width:52px;height:40px;border:2px solid var(--noir);background:var(--blanc);padding:3px;cursor:pointer}
+
+/* ---------- Dropzone ---------- */
+.drop{
+  border:3px dashed var(--noir);background:var(--blanc);padding:34px 18px;text-align:center;cursor:pointer;
+  transition:background .15s ease, transform .1s ease;position:relative;
+}
+.drop.sur{background:var(--bleu-clair);transform:scale(1.01);border-color:var(--bleu)}
+.drop b{display:block;font-size:18px}
+.drop .d-sub{color:var(--gris);font-size:14.5px;margin-top:4px}
+.drop .d-btn{
+  display:inline-block;margin-top:14px;font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.03em;
+  background:var(--jaune);border:2px solid var(--noir);box-shadow:3px 3px 0 var(--noir);padding:10px 18px;font-size:15px;
+}
+.drop:active .d-btn{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--noir)}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.fichiers{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin-top:14px}
+.fich{
+  border:2px solid var(--noir);background:var(--blanc);box-shadow:3px 3px 0 var(--noir);position:relative;
+  animation:pop .3s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+.fich .f-img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--chaux)}
+.fich .f-doc{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:30px;background:var(--bleu-clair)}
+.fich .f-nom{font-size:10.5px;font-weight:600;padding:4px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.fich .f-x{
+  position:absolute;top:-9px;right:-9px;width:24px;height:24px;border:2px solid var(--noir);background:var(--noir);color:#fff;
+  font-weight:800;font-size:13px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;
+}
+.jauge{margin-top:12px;font-size:13.5px;color:var(--gris);display:none}
+.jauge.on{display:block}
+.jauge .j-rail{height:7px;background:#E4E1D6;border:1px solid var(--noir);margin-top:5px}
+.jauge .j-fill{height:100%;width:0;background:var(--bleu);transition:width .3s ease}
+.jauge.pleine .j-fill{background:#c0261f}
+.astuce{margin-top:14px;font-size:14px;background:var(--chaux);border:2px solid var(--noir);padding:10px 12px}
+.astuce b{color:var(--bleu)}
+
+/* ---------- Téléphone (aperçu live) ---------- */
+.phonecol{position:sticky;top:24px;display:none}
+@media (min-width:1120px){.phonecol{display:block}}
+.ph-titre{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:15px;letter-spacing:.03em;text-align:center;margin-bottom:10px}
+.ph-titre span{color:var(--bleu)}
+.phone{
+  width:300px;margin:0 auto;background:var(--noir);border-radius:34px;padding:10px;
+  box-shadow:10px 10px 0 rgba(17,17,17,.18);
+}
+.ph-screen{background:#fff;border-radius:24px;overflow:hidden;height:560px;display:flex;flex-direction:column;position:relative}
+.ph-notch{height:22px;display:flex;align-items:center;justify-content:center;flex:none}
+.ph-notch i{width:70px;height:8px;background:var(--noir);border-radius:6px}
+.ph-body{flex:1;overflow:hidden;display:flex;flex-direction:column;font-size:11px}
+.ph-head{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:2px solid var(--pA,#111);flex:none;gap:8px}
+.ph-logo{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:12px;letter-spacing:.03em;color:var(--pA,#111);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;display:flex;align-items:center;gap:6px}
+.ph-logo img{width:20px;height:20px;object-fit:contain;border-radius:4px}
+.ph-burger{width:18px;flex:none}
+.ph-burger i{display:block;height:2.5px;background:var(--pA,#111);margin:3px 0;border-radius:2px}
+.ph-hero{background:var(--pB,#F7F5EF);padding:18px 14px 16px;flex:none;position:relative;overflow:hidden}
+.ph-hero .ph-tag{display:inline-block;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--pA,#111);color:var(--pTxtA,#fff);padding:2px 7px;border-radius:20px;margin-bottom:7px}
+.ph-hero h4{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:19px;line-height:1.06;letter-spacing:.01em;word-break:break-word}
+.ph-hero .ph-sub{font-size:9.5px;color:#555;margin-top:5px}
+.ph-ctas{display:flex;gap:6px;margin-top:11px;flex-wrap:wrap}
+.ph-cta{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:9px;letter-spacing:.04em;padding:6px 10px;border-radius:5px;background:var(--pA,#111);color:var(--pTxtA,#fff);border:1.5px solid rgba(0,0,0,.25)}
+.ph-cta.sec{background:#fff;color:var(--pA,#111);border:1.5px solid var(--pA,#111)}
+.ph-nav{display:flex;gap:5px;padding:8px 12px;flex-wrap:wrap;flex:none;border-bottom:1px solid #eee}
+.ph-nav i{font-style:normal;font-size:8.5px;font-weight:700;border:1.2px solid #ccc;border-radius:20px;padding:2px 8px;color:#444;white-space:nowrap}
+.ph-gal{flex:1;overflow:hidden;padding:10px 12px}
+.ph-gal .g-titre{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:11px;margin-bottom:7px;color:var(--pA,#111)}
+.ph-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.ph-grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;border:1.5px solid #e6e3da;animation:pop .35s cubic-bezier(0.34,1.56,0.64,1)}
+.ph-grid .g-vide{aspect-ratio:1;border:1.5px dashed #cfccc2;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#b7b4aa;font-size:15px}
+.ph-foot{flex:none;font-size:8px;color:#999;text-align:center;padding:6px;border-top:1px solid #eee}
+.ph-note{font-size:12.5px;color:var(--gris);text-align:center;margin-top:10px;max-width:300px;margin-left:auto;margin-right:auto}
+
+/* bulle aperçu mobile */
+.ph-bulle{
+  position:fixed;right:14px;bottom:96px;z-index:60;display:flex;align-items:center;gap:8px;
+  font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.03em;font-size:13px;
+  background:var(--jaune);border:2px solid var(--noir);box-shadow:4px 4px 0 var(--noir);padding:10px 14px;cursor:pointer;
+}
+.ph-bulle:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--noir)}
+@media (min-width:1120px){.ph-bulle{display:none}}
+.ph-voile{position:fixed;inset:0;background:rgba(17,17,17,.8);z-index:90;display:none;align-items:center;justify-content:center;padding:16px}
+.ph-voile.on{display:flex}
+.ph-voile .phone{margin:0}
+.ph-fermer{position:absolute;top:14px;right:14px;width:42px;height:42px;background:var(--jaune);border:2px solid var(--noir);font-size:19px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #000}
+
+/* ---------- Barre du bas ---------- */
+.barre{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--noir);color:#fff}
+.barre-in{max-width:760px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:14px}
+.barre .prog{flex:1;min-width:0}
+.barre .prog .p-txt{font-size:12.5px;font-weight:600;opacity:.85;margin-bottom:5px}
+.barre .prog .p-rail{height:8px;background:#3a3a36;border:1px solid #000;position:relative}
+.barre .prog .p-fill{height:100%;width:0;background:var(--jaune);transition:width .35s ease}
+.p-nono{position:absolute;bottom:6px;left:0;width:34px;transition:left .35s ease;transform:translateX(-50%);pointer-events:none}
+.btn-envoi{
+  font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.03em;
+  background:var(--bleu);color:#fff;border:2px solid #fff;box-shadow:3px 3px 0 rgba(255,255,255,.35);
+  padding:12px 18px;font-size:16px;cursor:pointer;white-space:nowrap;
+}
+.btn-envoi:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(255,255,255,.35)}
+.btn-envoi[disabled]{opacity:.6;cursor:wait}
+@media (max-width:560px){
+  .barre-in{gap:10px;padding:10px 14px}
+  .btn-envoi{padding:11px 14px;font-size:15px}
+}
+
+/* ---------- Modale ---------- */
+.voile{position:fixed;inset:0;background:rgba(17,17,17,.78);z-index:100;display:none;align-items:center;justify-content:center;padding:18px}
+.voile.on{display:flex}
+.modale{background:var(--blanc);border:2px solid var(--noir);box-shadow:8px 8px 0 var(--noir);max-width:560px;width:100%;max-height:85vh;overflow:auto;padding:26px 22px;position:relative}
+.modale h3{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:24px;margin-bottom:10px}
+.modale h3 span{color:var(--bleu)}
+.modale p{margin-bottom:14px}
+.modale .recap-box{background:var(--chaux);border:2px solid var(--noir);padding:12px;font-size:13px;white-space:pre-wrap;max-height:200px;overflow:auto;margin-bottom:14px;font-family:ui-monospace,monospace}
+.modale .m-btns{display:flex;flex-wrap:wrap;gap:10px}
+.m-btn{font-family:'Anton',sans-serif;text-transform:uppercase;border:2px solid var(--noir);box-shadow:3px 3px 0 var(--noir);padding:10px 16px;font-size:14px;cursor:pointer;background:var(--blanc);color:var(--noir);text-decoration:none;display:inline-block}
+.m-btn.bleu{background:var(--bleu);color:#fff}
+.m-btn.jaune{background:var(--jaune)}
+.m-btn.vert{background:#25D366;color:#fff}
+.m-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--noir)}
+.done-nono{width:130px;margin:0 auto 6px}
+.err{border-color:#c0261f !important;outline:3px solid #f5b6b3}
+.confetti{position:fixed;inset:0;z-index:99;pointer-events:none}
+
+/* ---------- Nono ---------- */
+.nono{width:100%;height:auto;display:block}
+.nono .bob{animation:bob 3.2s ease-in-out infinite;transform-origin:100px 150px}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.nono .arm-wave{animation:wave 1.9s ease-in-out infinite;transform-origin:156px 118px}
+@keyframes wave{0%,100%{transform:rotate(0)}40%{transform:rotate(-14deg)}60%{transform:rotate(6deg)}}
+.nono .flag{animation:flagw 2.6s ease-in-out infinite;transform-origin:186px 88px}
+@keyframes flagw{0%,100%{transform:rotate(0)}50%{transform:rotate(-5deg)}}
+.p-nono .nono .leg.l{animation:step1 .55s linear infinite;transform-origin:84px 190px}
+.p-nono .nono .leg.r{animation:step2 .55s linear infinite;transform-origin:116px 190px}
+@keyframes step1{0%,100%{transform:rotate(14deg)}50%{transform:rotate(-14deg)}}
+@keyframes step2{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+@media (prefers-reduced-motion:reduce){
+  .nono .bob,.nono .arm-wave,.nono .flag,.p-nono .nono .leg.l,.p-nono .nono .leg.r{animation:none}
+  .fich,.ph-grid img,.metiers button.on{animation:none}
+}
+
+footer{padding:30px 0 10px;text-align:center;color:var(--gris);font-size:13.5px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <div class="logo"><a href="../">Studio <span>Novalem</span></a></div>
+    <div class="head-tag">Fiche projet</div>
+  </div>
+</header>
+
+<div class="page">
+<div class="colform">
+
+  <div class="intro">
+    <div class="intro-nono" data-nono="salut" aria-hidden="true"></div>
+    <h1>Préparons <em>votre</em> site.</h1>
+    <p>Pas le temps pour un rendez-vous ? Aucun problème. Répondez à ce que vous pouvez ici, glissez vos photos, et je commence à travailler sur votre site. Le reste, on le règle en 5 minutes au téléphone.</p>
+    <div class="duree">&#9201;&#65039; <span><b>5 minutes</b>, montre en main</span></div>
+  </div>
+
+  <!-- 1. VOTRE COMMERCE -->
+  <section class="bloc">
+    <div class="sec-head"><div class="sec-num">1</div><h2>Votre commerce</h2></div>
+    <p class="sec-sub">Trois réponses, et je sais déjà à qui je parle.</p>
+
+    <div class="q">
+      <label class="q-label" for="c-nom">Le nom de votre commerce</label>
+      <input type="text" id="c-nom" data-req placeholder="Ex : Chez Lucie" autocomplete="organization">
+    </div>
+
+    <div class="q">
+      <span class="q-label" id="lbl-metier">Vous faites quoi ?</span>
+      <div class="metiers" id="metiers" role="group" aria-labelledby="lbl-metier"></div>
+      <input type="text" id="c-metier-autre" class="champ-autre" placeholder="Dites-moi en un mot : fleuriste, garage, photographe…">
+    </div>
+
+    <div class="q deux">
+      <div>
+        <label class="q-label" for="c-commune">Votre commune</label>
+        <input type="text" id="c-commune" placeholder="Ex : Sainte-Anne">
+      </div>
+      <div>
+        <label class="q-label" for="c-ile">Votre île</label>
+        <select id="c-ile">
+          <option>Guadeloupe</option>
+          <option>Martinique</option>
+          <option>Saint-Martin</option>
+          <option>Saint-Barthélemy</option>
+          <option>Autre</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="q">
+      <label class="q-label" for="c-phrase">En une phrase, vous faites quoi de spécial ?<small>C'est souvent cette phrase qu'on met en grand sur le site.</small></label>
+      <textarea id="c-phrase" placeholder="Ex : Des sorbets artisanaux aux fruits du jardin, depuis 2015."></textarea>
+    </div>
+  </section>
+
+  <!-- 2. COORDONNÉES -->
+  <section class="bloc">
+    <div class="sec-head"><div class="sec-num">2</div><h2>Ce qu'on affiche sur le site</h2></div>
+    <p class="sec-sub">Les infos que vos clients doivent trouver en 2 secondes.</p>
+
+    <div class="q deux">
+      <div>
+        <label class="q-label" for="i-tel">Téléphone</label>
+        <input type="tel" id="i-tel" placeholder="0690 …" autocomplete="tel">
+      </div>
+      <div>
+        <label class="q-label" for="i-email">Email</label>
+        <input type="email" id="i-email" placeholder="contact@…" autocomplete="email">
+      </div>
+    </div>
+
+    <div class="q">
+      <span class="q-label">Vos clients peuvent vous écrire sur WhatsApp ?</span>
+      <div class="chips" data-grp="whatsapp">
+        <label><input type="radio" name="whatsapp" value="Oui, ce numéro"><span class="chip">Oui, ce numéro</span></label>
+        <label><input type="radio" name="whatsapp" value="Oui, un autre numéro"><span class="chip">Oui, un autre numéro</span></label>
+        <label><input type="radio" name="whatsapp" value="Non"><span class="chip">Non</span></label>
+      </div>
+      <input type="text" id="i-wa-num" class="champ-autre" placeholder="Le numéro WhatsApp">
+    </div>
+
+    <div class="q" id="q-adresse">
+      <label class="q-label" for="i-adresse">L'adresse de votre local<small>Laissez vide si vous vous déplacez chez les clients.</small></label>
+      <input type="text" id="i-adresse" placeholder="Ex : 12 rue de la Plage, Sainte-Anne" autocomplete="street-address">
+    </div>
+
+    <div class="q">
+      <label class="q-label" for="i-horaires">Vos horaires<small>Comme vous les diriez à un client au téléphone.</small></label>
+      <textarea id="i-horaires" placeholder="Ex : Du mardi au samedi, 9h - 18h. Fermé le lundi."></textarea>
+    </div>
+
+    <div class="q deux">
+      <div>
+        <label class="q-label" for="i-insta">Instagram</label>
+        <input type="text" id="i-insta" placeholder="@votrecompte">
+      </div>
+      <div>
+        <label class="q-label" for="i-fb">Facebook</label>
+        <input type="text" id="i-fb" placeholder="Nom de votre page">
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. VOTRE SITE -->
+  <section class="bloc">
+    <div class="sec-head"><div class="sec-num">3</div><h2>Votre site</h2></div>
+    <p class="sec-sub" id="sub-site">À quoi il doit servir, concrètement.</p>
+
+    <div class="q">
+      <span class="q-label">Le site doit surtout servir à quoi ?<small>Cochez tout ce qui compte pour vous.</small></span>
+      <div class="cases" id="objectifs"></div>
+    </div>
+
+    <div id="speciales"></div>
+
+    <div class="q">
+      <span class="q-label">Les pages de votre site<small>J'ai pré-coché ce qui marche le mieux dans votre métier. Ajustez si besoin.</small></span>
+      <div class="cases" id="pages"></div>
+    </div>
+
+    <div class="q">
+      <label class="q-label" for="s-aimes">Des sites ou des pages Insta que vous trouvez beaux ?<small>Même hors de votre métier. Ça m'aide énormément.</small></label>
+      <input type="text" id="s-aimes" placeholder="Collez un ou deux liens, ou des noms">
+    </div>
+  </section>
+
+  <!-- 4. VOTRE STYLE -->
+  <section class="bloc">
+    <div class="sec-head"><div class="sec-num">4</div><h2>Votre style</h2></div>
+    <p class="sec-sub">Regardez le téléphone : il change en direct avec vos choix.</p>
+
+    <div class="q">
+      <span class="q-label">Vous avez un logo ?</span>
+      <div class="chips" data-grp="logo">
+        <label><input type="radio" name="logo" value="Oui, je l'envoie plus bas"><span class="chip">Oui, je l'envoie plus bas</span></label>
+        <label><input type="radio" name="logo" value="Non, à créer"><span class="chip">Non, il faut le créer</span></label>
+        <label><input type="radio" name="logo" value="Non, juste mon nom en beau"><span class="chip">Non, juste mon nom en beau</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <span class="q-label">Vos couleurs<small>Touchez une palette pour l'essayer sur l'aperçu.</small></span>
+      <div class="pals" id="pals"></div>
+      <div class="pal-custom">
+        <input type="color" id="pal-pick" value="#1F4FBF" aria-label="Choisir une couleur personnalisée">
+        <span style="font-size:14px;color:var(--gris)">… ou piochez exactement la vôtre</span>
+      </div>
+    </div>
+
+    <div class="q">
+      <span class="q-label">L'ambiance</span>
+      <div class="chips" data-grp="ambiance">
+        <label><input type="radio" name="ambiance" value="Simple et pro"><span class="chip">Simple et pro</span></label>
+        <label><input type="radio" name="ambiance" value="Chaleureux"><span class="chip">Chaleureux</span></label>
+        <label><input type="radio" name="ambiance" value="Moderne"><span class="chip">Moderne</span></label>
+        <label><input type="radio" name="ambiance" value="Haut de gamme"><span class="chip">Haut de gamme</span></label>
+        <label><input type="radio" name="ambiance" value="Coloré"><span class="chip">Coloré</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. VOS FICHIERS -->
+  <section class="bloc">
+    <div class="sec-head"><div class="sec-num">5</div><h2>Vos photos et fichiers</h2></div>
+    <p class="sec-sub" id="sub-fichiers">Glissez tout ce que vous avez, je fais le tri.</p>
+
+    <div class="drop" id="drop">
+      <b>Glissez vos fichiers ici</b>
+      <span class="d-sub" id="drop-hint">Logo, photos, carte, tarifs… tout m'intéresse.</span>
+      <span class="d-btn">Choisir des fichiers</span>
+      <input type="file" id="drop-input" multiple accept="image/*,.pdf,.doc,.docx,.txt" aria-label="Ajouter des fichiers">
+    </div>
+    <div class="fichiers" id="fichiers"></div>
+    <div class="jauge" id="jauge">
+      <span id="jauge-txt"></span>
+      <div class="j-rail"><div class="j-fill" id="jauge-fill"></div></div>
+    </div>
+    <div class="astuce">&#128241; <b>Vos photos sont sur votre téléphone ?</b> Ouvrez cette page depuis votre téléphone, ou envoyez-les moi simplement sur WhatsApp après.</div>
+  </section>
+
+  <!-- 6. ON SE PARLE -->
+  <section class="bloc">
+    <div class="sec-head"><div class="sec-num">6</div><h2>Et vous ?</h2></div>
+    <p class="sec-sub">Pour que je sache qui appeler, et quand.</p>
+
+    <div class="q deux">
+      <div>
+        <label class="q-label" for="f-nom">Votre prénom et nom</label>
+        <input type="text" id="f-nom" data-req placeholder="Ex : Lucie Martin" autocomplete="name">
+      </div>
+      <div>
+        <label class="q-label" for="f-tel">Votre numéro direct<small>Si différent de celui du commerce.</small></label>
+        <input type="tel" id="f-tel" placeholder="0690 …">
+      </div>
+    </div>
+
+    <div class="q">
+      <span class="q-label">Le meilleur moment pour vous appeler 5 minutes</span>
+      <div class="chips" data-grp="moment">
+        <label><input type="radio" name="moment" value="Le matin"><span class="chip">Le matin</span></label>
+        <label><input type="radio" name="moment" value="Entre midi et deux"><span class="chip">Entre midi et deux</span></label>
+        <label><input type="radio" name="moment" value="L'après-midi"><span class="chip">L'après-midi</span></label>
+        <label><input type="radio" name="moment" value="Le soir"><span class="chip">Le soir</span></label>
+        <label><input type="radio" name="moment" value="Plutôt par WhatsApp"><span class="chip">Plutôt par WhatsApp</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <label class="q-label" for="f-mot">Un mot pour moi ?<small>Une idée précise, une contrainte, une date importante…</small></label>
+      <textarea id="f-mot" placeholder="Dites-moi tout."></textarea>
+    </div>
+  </section>
+
+  <footer>Studio Novalem — l'atelier web des Antilles. Vos fichiers et réponses restent entre nous.</footer>
+</div>
+
+<!-- Aperçu téléphone (desktop) -->
+<aside class="phonecol" aria-hidden="true">
+  <div class="ph-titre">Votre site <span>se dessine</span></div>
+  <div id="phone-slot-desktop"></div>
+  <p class="ph-note">Ce n'est qu'une esquisse. La vraie version arrive sous 48 h après votre envoi.</p>
+</aside>
+</div>
+
+<!-- Aperçu téléphone (mobile) -->
+<button class="ph-bulle" id="ph-bulle" type="button">&#128064; Voir mon site</button>
+<div class="ph-voile" id="ph-voile">
+  <button class="ph-fermer" id="ph-fermer" type="button" aria-label="Fermer">&#10005;</button>
+  <div id="phone-slot-mobile"></div>
+</div>
+
+<!-- Le téléphone (déplacé selon l'écran) -->
+<template id="tpl-phone">
+  <div class="phone">
+    <div class="ph-screen">
+      <div class="ph-notch"><i></i></div>
+      <div class="ph-body" id="ph-body">
+        <div class="ph-head">
+          <span class="ph-logo" id="ph-logo">Votre commerce</span>
+          <span class="ph-burger"><i></i><i></i><i></i></span>
+        </div>
+        <div class="ph-hero">
+          <span class="ph-tag" id="ph-tag">Antilles</span>
+          <h4 id="ph-nom">Votre commerce</h4>
+          <div class="ph-sub" id="ph-phrase">Votre phrase apparaîtra ici.</div>
+          <div class="ph-ctas" id="ph-ctas"></div>
+        </div>
+        <div class="ph-nav" id="ph-nav"></div>
+        <div class="ph-gal">
+          <div class="g-titre" id="ph-gtitre">Vos photos</div>
+          <div class="ph-grid" id="ph-grid"></div>
+        </div>
+        <div class="ph-foot">Site créé par Studio Novalem</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- Barre du bas -->
+<div class="barre">
+  <div class="barre-in">
+    <div class="prog">
+      <div class="p-txt" id="prog-txt">Commencez, Nono suit votre avancée.</div>
+      <div class="p-rail">
+        <div class="p-fill" id="prog-fill"></div>
+        <div class="p-nono" id="p-nono" aria-hidden="true"></div>
+      </div>
+    </div>
+    <button class="btn-envoi" id="btn-envoi" type="button">Envoyer ma fiche</button>
+  </div>
+</div>
+
+<div class="voile" id="voile"><div class="modale" id="modale"></div></div>
+<canvas class="confetti" id="confetti" width="10" height="10" style="display:none"></canvas>
+
+<script>
+/* =====================================================
+   RÉGLAGES
+   ===================================================== */
+var CONFIG = {
+  EMAIL: "contact@studionovalem.fr",          // FormSubmit (déjà activé)
+  WHATSAPP: "590691253449",                    // wa.me sans le +
+  // Les fichiers passent par TON Supabase (liens de téléchargement dans le mail).
+  // À remplir une fois : Supabase > ton projet > Settings > API.
+  SUPABASE_URL: "https://hfdkkdyyhpymrwiqmitn.supabase.co",           // ex : https://abcdefgh.supabase.co
+  SUPABASE_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhmZGtrZHl5aHB5bXJ3aXFtaXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NTU3OTgsImV4cCI6MjA4OTIzMTc5OH0.UWli4BIDWHwGOKuFCom8wQFYHnNYPtODAI5Cl7tCRJ8",       // la clé "anon public"
+  BUCKET: "fiches-projet"
+};
+
+/* =====================================================
+   MÉTIERS — tout ce qui s'adapte vit ici
+   ===================================================== */
+var METIERS = {
+  resto: {
+    label: "Restaurant / Snack", ico: "&#127869;&#65039;",
+    tagline: "La bonne adresse",
+    objectifs: ["Être trouvé sur Google", "Montrer ma carte et mes plats", "Prendre des réservations", "Mettre en avant l'à emporter / la livraison", "Récolter des avis clients"],
+    pages: [["Accueil",1],["La carte",1],["Photos",1],["Avis clients",0],["Contact & horaires",1]],
+    speciales: [
+      { nom:"resa", q:"On réserve comment chez vous ?", chips:["Par téléphone","Sur WhatsApp","On ne réserve pas"] },
+      { nom:"carte", q:"Votre carte change souvent ?", chips:["Presque jamais","Selon la saison","Toutes les semaines"] }
+    ],
+    dropHint: "Votre carte (photo ou PDF), vos plats, votre salle, votre devanture.",
+    photoTitre: "Nos plats", ctas: ["Réserver","La carte"],
+    phrasePh: "Ex : Cuisine créole maison, produits du marché de Sainte-Anne."
+  },
+  commerce: {
+    label: "Commerce / Boutique", ico: "&#128717;&#65039;",
+    tagline: "La boutique",
+    objectifs: ["Être trouvé sur Google", "Montrer mes produits", "Donner envie de passer en boutique", "Annoncer les arrivages et promos", "Vendre en ligne (plus tard ou tout de suite)"],
+    pages: [["Accueil",1],["Nos produits",1],["La boutique",1],["Contact & horaires",1]],
+    speciales: [
+      { nom:"vente", q:"Vendre en ligne, ça vous parle ?", chips:["Oui, dès le départ","Peut-être plus tard","Non, juste vitrine"] }
+    ],
+    dropHint: "Votre logo, vos produits phares, l'intérieur et la devanture de la boutique.",
+    photoTitre: "Nos produits", ctas: ["Nous trouver","WhatsApp"],
+    phrasePh: "Ex : Prêt-à-porter et accessoires, sélectionnés avec amour à Jarry."
+  },
+  artisan: {
+    label: "Artisan / BTP", ico: "&#128296;",
+    tagline: "L'artisan",
+    objectifs: ["Être trouvé sur Google", "Montrer mes réalisations (avant / après)", "Recevoir des demandes de devis", "Inspirer confiance (assurances, garanties)", "Être rappelé facilement"],
+    pages: [["Accueil",1],["Mes réalisations",1],["Mes services",1],["Demande de devis",1],["Contact",1]],
+    speciales: [
+      { nom:"zone", q:"Vous intervenez où ?", chips:["Ma commune et autour","Toute l'île","Plusieurs îles"] }
+    ],
+    dropHint: "Photos de chantiers finis (avant / après si vous avez), votre logo, votre camion.",
+    photoTitre: "Mes réalisations", ctas: ["Demander un devis","Appeler"],
+    phrasePh: "Ex : Plomberie et rénovation, 15 ans de chantiers propres en Guadeloupe."
+  },
+  beaute: {
+    label: "Coiffure / Beauté", ico: "&#9986;&#65039;",
+    tagline: "Le salon",
+    objectifs: ["Être trouvé sur Google", "Montrer mes prestations et mes prix", "Faciliter la prise de rendez-vous", "Montrer mon travail en photos", "Récolter des avis clients"],
+    pages: [["Accueil",1],["Prestations & tarifs",1],["Galerie",1],["Rendez-vous",1],["Contact",1]],
+    speciales: [
+      { nom:"rdv", q:"On prend rendez-vous comment ?", chips:["Par téléphone","Sur WhatsApp","Planity / autre appli","J'aimerais en ligne sur le site"] }
+    ],
+    dropHint: "Vos plus belles réalisations, le salon, votre carte de prestations avec les prix.",
+    photoTitre: "Mes réalisations", ctas: ["Prendre RDV","WhatsApp"],
+    phrasePh: "Ex : Coiffure afro et soins naturels, sur rendez-vous au Gosier."
+  },
+  location: {
+    label: "Location (gîtes, voitures…)", ico: "&#128273;",
+    tagline: "La location",
+    objectifs: ["Être trouvé sur Google", "Montrer ce que je loue, avec les tarifs", "Recevoir des demandes de réservation", "Rassurer (photos, conditions, caution)", "Toucher les touristes avant leur arrivée"],
+    pages: [["Accueil",1],["Ce que je loue",1],["Tarifs",1],["Réservation",1],["Contact",1]],
+    speciales: [
+      { nom:"quoi", q:"Vous louez quoi ?", chips:["Gîtes / logements","Voitures / scooters","Bateaux / jet-skis","Matériel","Plusieurs de ces choses"] }
+    ],
+    dropHint: "Photos de chaque bien (gîte, véhicule, bateau…), vos tarifs, vos conditions.",
+    photoTitre: "À louer", ctas: ["Réserver","WhatsApp"],
+    phrasePh: "Ex : 3 gîtes les pieds dans l'eau à Deshaies, climatisés, wifi."
+  },
+  sante: {
+    label: "Santé / Bien-être", ico: "&#127807;",
+    tagline: "Le cabinet",
+    objectifs: ["Être trouvé sur Google", "Présenter mon cabinet et mon parcours", "Faciliter la prise de rendez-vous", "Expliquer mes soins et tarifs", "Rassurer les nouveaux patients"],
+    pages: [["Accueil",1],["Mes soins",1],["Qui suis-je",1],["Rendez-vous",1],["Contact & accès",1]],
+    speciales: [
+      { nom:"rdv", q:"On prend rendez-vous comment ?", chips:["Par téléphone","Doctolib / autre appli","Sur WhatsApp","J'aimerais en ligne sur le site"] }
+    ],
+    dropHint: "Une photo de vous, le cabinet, vos diplômes ou certifications si vous voulez.",
+    photoTitre: "Le cabinet", ctas: ["Prendre RDV","Appeler"],
+    phrasePh: "Ex : Ostéopathe D.O., adultes, sportifs et nourrissons, à Baie-Mahault."
+  },
+  services: {
+    label: "Services / Bureau", ico: "&#128188;",
+    tagline: "Le cabinet",
+    objectifs: ["Être trouvé sur Google", "Expliquer clairement ce que je fais", "Recevoir des demandes de devis ou de contact", "Faire sérieux face aux concurrents", "Montrer mes références"],
+    pages: [["Accueil",1],["Mes services",1],["Références",0],["Contact",1]],
+    speciales: [
+      { nom:"cible", q:"Vos clients, c'est plutôt…", chips:["Des particuliers","Des entreprises","Les deux"] }
+    ],
+    dropHint: "Votre logo, une photo de vous ou de l'équipe, une plaquette si vous en avez une.",
+    photoTitre: "En images", ctas: ["Me contacter","Devis"],
+    phrasePh: "Ex : Expertise comptable pour les TPE de Guadeloupe, sans jargon."
+  },
+  asso: {
+    label: "Association / Sport", ico: "&#9917;",
+    tagline: "Le club",
+    objectifs: ["Être trouvé sur Google", "Présenter le club et les activités", "Faciliter les inscriptions / adhésions", "Annoncer les événements et résultats", "Trouver des sponsors"],
+    pages: [["Accueil",1],["Les activités",1],["Inscriptions",1],["Actualités",0],["Contact",1]],
+    speciales: [
+      { nom:"inscr", q:"On s'inscrit comment ?", chips:["Sur place","Par téléphone / WhatsApp","J'aimerais en ligne sur le site"] }
+    ],
+    dropHint: "Le logo du club, photos d'entraînements, d'événements, de l'équipe.",
+    photoTitre: "Le club en images", ctas: ["Nous rejoindre","Contact"],
+    phrasePh: "Ex : Club de karaté pour petits et grands, aux Abymes depuis 1998."
+  },
+  autre: {
+    label: "Autre chose", ico: "&#10024;",
+    tagline: "Aux Antilles",
+    objectifs: ["Être trouvé sur Google", "Présenter mon activité clairement", "Être contacté facilement", "Montrer mon travail en photos"],
+    pages: [["Accueil",1],["Ce que je fais",1],["Galerie",0],["Contact",1]],
+    speciales: [],
+    dropHint: "Votre logo, vos photos, tout document qui présente votre activité.",
+    photoTitre: "En images", ctas: ["Me contacter","WhatsApp"],
+    phrasePh: "Ex : Photographe de mariages sur toute la Guadeloupe."
+  }
+};
+
+/* Palettes de couleurs : [accent, fond clair] */
+var PALS = [
+  { nom:"Bleu confiance", a:"#1F4FBF", b:"#EAF0FD" },
+  { nom:"Vert nature", a:"#0A8F5B", b:"#E9F7F0" },
+  { nom:"Terracotta", a:"#C4572A", b:"#FBEFE8" },
+  { nom:"Noir & or", a:"#1A1A1A", b:"#F6F1E4" },
+  { nom:"Turquoise lagon", a:"#0C8F9E", b:"#E8F7F8" },
+  { nom:"Bordeaux", a:"#7E1F3D", b:"#F9EEF1" },
+  { nom:"Rose punchy", a:"#D6336C", b:"#FCEEF3" },
+  { nom:"Je vous fais confiance", a:"", b:"" }
+];
+
+/* =====================================================
+   NONO
+   ===================================================== */
+function nono(pose) {
+  var arms = {
+    salut: { l:'M44 118c-14 10-24 28-24 46', r:'M156 118c14-12 26-30 30-52', h:[186,66], rc:'arm-wave' },
+    plan:  { l:'M44 118c-10 16-6 30 8 40', r:'M156 118c10 16 6 30-8 40', h:[148,158], rc:'' },
+    drapeau:{ l:'M44 118c-14 10-24 28-24 46', r:'M156 118c16-6 26-16 30-30', h:[186,88], rc:'flag' },
+    marche:{ l:'M44 118c-14 10-24 28-24 46', r:'M156 118c14 10 24 28 24 46', h:[180,164], rc:'' }
+  }[pose] || {};
+  var prop = '';
+  if (pose === 'plan') prop = '<g><rect x="60" y="150" width="80" height="54" rx="4" fill="#fff" stroke="#111" stroke-width="4"/><path d="M70 162h60M70 174h40M70 186h50" stroke="#1F4FBF" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 6"/></g>';
+  if (pose === 'drapeau') prop = '<g class="flag"><path d="M186 88V22" stroke="#111" stroke-width="6" stroke-linecap="round"/><path d="M188 24h50l-10 14 10 14h-50z" fill="#F5C400" stroke="#111" stroke-width="4" stroke-linejoin="round"/><text x="208" y="44" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="13" fill="#111">RE&Ccedil;U !</text></g>';
+  var mouth = '<path d="M88 118c8 10 16 10 24 0" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/>';
+  var hand = '<circle cx="' + arms.h[0] + '" cy="' + arms.h[1] + '" r="10" fill="#F5C400" stroke="#111" stroke-width="4"/>';
+  return '<svg class="nono" viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    '<g class="bob">' +
+    '<g class="leg l"><path d="M84 190l-6 46" stroke="#111" stroke-width="8" stroke-linecap="round"/><ellipse cx="72" cy="240" rx="18" ry="9" fill="#F5C400" stroke="#111" stroke-width="4"/></g>' +
+    '<g class="leg r"><path d="M116 190l6 46" stroke="#111" stroke-width="8" stroke-linecap="round"/><ellipse cx="128" cy="240" rx="18" ry="9" fill="#F5C400" stroke="#111" stroke-width="4"/></g>' +
+    '<rect x="40" y="62" width="120" height="130" rx="18" fill="#1F4FBF" stroke="#111" stroke-width="5"/>' +
+    '<rect x="49" y="71" width="102" height="112" rx="12" fill="none" stroke="#F7F5EF" stroke-width="7"/>' +
+    '<path d="M56 62c0-14 12-24 44-24s44 10 44 24z" fill="#F5C400" stroke="#111" stroke-width="5"/><path d="M40 62h130" stroke="#111" stroke-width="6" stroke-linecap="round"/>' +
+    '<g class="eye"><ellipse cx="82" cy="100" rx="11" ry="13" fill="#fff" stroke="#111" stroke-width="3"/><circle cx="85" cy="102" r="5" fill="#111"/></g>' +
+    '<g class="eye"><ellipse cx="118" cy="100" rx="11" ry="13" fill="#fff" stroke="#111" stroke-width="3"/><circle cx="121" cy="102" r="5" fill="#111"/></g>' +
+    mouth +
+    '<text x="103" y="176" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="44" fill="#F5C400">N</text><text x="100" y="173" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="44" fill="#F7F5EF">N</text>' +
+    '<path d="' + arms.l + '" fill="none" stroke="#111" stroke-width="8" stroke-linecap="round"/><circle cx="20" cy="166" r="10" fill="#F5C400" stroke="#111" stroke-width="4"/>' +
+    '<g class="' + arms.rc + '"><path d="' + arms.r + '" fill="none" stroke="#111" stroke-width="8" stroke-linecap="round"/>' + prop + hand + '</g>' +
+    '</g></svg>';
+}
+document.querySelector('.intro-nono').innerHTML = nono('salut');
+document.getElementById('p-nono').innerHTML = nono('marche');
+
+/* =====================================================
+   OUTILS
+   ===================================================== */
+function $(s){ return document.querySelector(s); }
+function $$(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
+function val(id){ var e = document.getElementById(id); return e ? e.value.trim() : ''; }
+function radio(nom){ var e = document.querySelector('input[name="'+nom+'"]:checked'); return e ? e.value : ''; }
+
+/* =====================================================
+   MÉTIERS : grille + adaptation
+   ===================================================== */
+var metierKey = '';
+var grille = document.getElementById('metiers');
+Object.keys(METIERS).forEach(function(k){
+  var m = METIERS[k];
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.innerHTML = '<span class="mi">' + m.ico + '</span>' + m.label;
+  b.addEventListener('click', function(){ choisirMetier(k, b); });
+  grille.appendChild(b);
+});
+
+function choisirMetier(k, btn){
+  metierKey = k;
+  $$('#metiers button').forEach(function(b){ b.classList.toggle('on', b === btn); });
+  document.getElementById('c-metier-autre').classList.toggle('on', k === 'autre');
+  remplirSite(METIERS[k]);
+}
+
+function remplirSite(m){
+
+  // Objectifs
+  var obj = document.getElementById('objectifs');
+  obj.innerHTML = m.objectifs.map(function(o, i){
+    return '<label><input type="checkbox" name="objectif" value="' + o + '"' + (i === 0 ? ' checked' : '') + '><span class="case">' + o + '</span></label>';
+  }).join('');
+
+  // Questions spéciales
+  var sp = document.getElementById('speciales');
+  sp.innerHTML = m.speciales.map(function(s){
+    return '<div class="q"><span class="q-label">' + s.q + '</span><div class="chips">' +
+      s.chips.map(function(c){
+        return '<label><input type="radio" name="sp-' + s.nom + '" value="' + c + '"><span class="chip">' + c + '</span></label>';
+      }).join('') + '</div></div>';
+  }).join('');
+
+  // Pages
+  var pg = document.getElementById('pages');
+  pg.innerHTML = m.pages.map(function(p){
+    return '<label><input type="checkbox" name="page" value="' + p[0] + '"' + (p[1] ? ' checked' : '') + '><span class="case">' + p[0] + '</span></label>';
+  }).join('');
+
+  // Textes adaptés
+  document.getElementById('c-phrase').placeholder = m.phrasePh;
+  document.getElementById('drop-hint').textContent = m.dropHint;
+  document.getElementById('sub-fichiers').textContent = "Plus vous m'en donnez, plus votre aperçu sera juste. " ;
+
+  $$('#objectifs input, #speciales input, #pages input').forEach(function(i){
+    i.addEventListener('change', toutMettreAJour);
+  });
+  toutMettreAJour();
+}
+
+/* =====================================================
+   PALETTES
+   ===================================================== */
+var palChoisie = null; // {nom, a, b}
+var palsBox = document.getElementById('pals');
+PALS.forEach(function(p, idx){
+  var b = document.createElement('button');
+  b.type = 'button';
+  if (p.a) {
+    b.innerHTML = '<span class="pal-dots"><i style="background:' + p.a + '"></i><i style="background:' + p.b + '"></i><i style="background:#F5C400"></i></span>' + p.nom;
+  } else {
+    b.innerHTML = '<span class="pal-dots"><i style="background:linear-gradient(135deg,#1F4FBF,#0A8F5B,#F5C400)"></i></span>' + p.nom;
+  }
+  b.addEventListener('click', function(){
+    palChoisie = p;
+    $$('#pals button').forEach(function(x){ x.classList.toggle('on', x === b); });
+    toutMettreAJour();
+  });
+  palsBox.appendChild(b);
+});
+document.getElementById('pal-pick').addEventListener('input', function(){
+  palChoisie = { nom: 'Couleur exacte ' + this.value, a: this.value, b: teinteClaire(this.value) };
+  $$('#pals button').forEach(function(x){ x.classList.remove('on'); });
+  toutMettreAJour();
+});
+function teinteClaire(hex){
+  var n = parseInt(hex.slice(1), 16), r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  var mix = function(c){ return Math.round(c + (255 - c) * 0.88); };
+  return 'rgb(' + mix(r) + ',' + mix(g) + ',' + mix(b) + ')';
+}
+function texteSur(hex){
+  if (!hex || hex[0] !== '#') return '#fff';
+  var n = parseInt(hex.slice(1), 16), r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  return (r * 0.299 + g * 0.587 + b * 0.114) > 150 ? '#111' : '#fff';
+}
+
+/* =====================================================
+   FICHIERS : drag & drop + compression
+   ===================================================== */
+var fichiers = []; // {file (Blob compressé), nomOrigine, type, url (preview), taille}
+var drop = document.getElementById('drop');
+var dropInput = document.getElementById('drop-input');
+
+['dragenter','dragover'].forEach(function(ev){
+  drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.add('sur'); });
+});
+['dragleave','drop'].forEach(function(ev){
+  drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.remove('sur'); });
+});
+drop.addEventListener('drop', function(e){ ajouterFichiers(e.dataTransfer.files); });
+dropInput.addEventListener('change', function(){ ajouterFichiers(this.files); this.value = ''; });
+
+function ajouterFichiers(liste){
+  Array.prototype.slice.call(liste).forEach(function(f){
+    if (fichiers.length >= 20) return;
+    if (f.type.indexOf('image/') === 0 && f.type !== 'image/svg+xml') {
+      compresserImage(f).then(function(res){ pousserFichier(res.blob, f.name, res.type, true); })
+        .catch(function(){
+          if (f.size <= 4 * 1024 * 1024) pousserFichier(f, f.name, f.type, true);
+        });
+    } else {
+      if (f.size <= 5 * 1024 * 1024) pousserFichier(f, f.name, f.type, false);
+    }
+  });
+}
+
+function compresserImage(file){
+  return new Promise(function(resolve, reject){
+    var img = new Image();
+    var url = URL.createObjectURL(file);
+    img.onload = function(){
+      var max = 1600, w = img.width, h = img.height;
+      if (w > max || h > max) { var r = Math.min(max / w, max / h); w = Math.round(w * r); h = Math.round(h * r); }
+      var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+      cv.getContext('2d').drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      var png = file.type === 'image/png'; // logos : on garde la transparence
+      cv.toBlob(function(blob){
+        if (!blob) return reject();
+        resolve({ blob: blob, type: png ? 'image/png' : 'image/jpeg' });
+      }, png ? 'image/png' : 'image/jpeg', 0.82);
+    };
+    img.onerror = function(){ URL.revokeObjectURL(url); reject(); };
+    img.src = url;
+  });
+}
+
+function pousserFichier(blob, nom, type, estImage){
+  var f = { file: blob, nomOrigine: nom, type: type, taille: blob.size, url: estImage ? URL.createObjectURL(blob) : null };
+  fichiers.push(f);
+  rendreFichiers();
+  toutMettreAJour();
+}
+
+function rendreFichiers(){
+  var box = document.getElementById('fichiers');
+  box.innerHTML = '';
+  fichiers.forEach(function(f, i){
+    var d = document.createElement('div');
+    d.className = 'fich';
+    d.innerHTML = (f.url
+      ? '<img class="f-img" src="' + f.url + '" alt="">'
+      : '<div class="f-doc">&#128196;</div>') +
+      '<span class="f-nom">' + f.nomOrigine.replace(/</g,'&lt;') + '</span>' +
+      '<button class="f-x" type="button" aria-label="Retirer">&#10005;</button>';
+    d.querySelector('.f-x').addEventListener('click', function(){
+      if (f.url) URL.revokeObjectURL(f.url);
+      fichiers.splice(i, 1);
+      rendreFichiers();
+      toutMettreAJour();
+    });
+    box.appendChild(d);
+  });
+  var total = fichiers.reduce(function(s, f){ return s + f.taille; }, 0);
+  var PLAFOND = 25 * 1024 * 1024;
+  var jauge = document.getElementById('jauge');
+  jauge.classList.toggle('on', fichiers.length > 0);
+  jauge.classList.toggle('pleine', total > PLAFOND);
+  document.getElementById('jauge-txt').textContent =
+    fichiers.length + ' fichier' + (fichiers.length > 1 ? 's' : '') + ' — ' + (total / 1024 / 1024).toFixed(1) + ' Mo' +
+    (total > PLAFOND ? ' (\u00e7a fait beaucoup : gardez le meilleur, le reste par WhatsApp)' : ' — vos photos sont all\u00e9g\u00e9es automatiquement');
+  document.getElementById('jauge-fill').style.width = Math.min(100, total / PLAFOND * 100) + '%';
+}
+
+/* =====================================================
+   APERÇU TÉLÉPHONE
+   ===================================================== */
+var phoneEl = document.getElementById('tpl-phone').content.firstElementChild.cloneNode(true);
+document.getElementById('phone-slot-desktop').appendChild(phoneEl);
+
+var bulle = document.getElementById('ph-bulle');
+var phVoile = document.getElementById('ph-voile');
+bulle.addEventListener('click', function(){
+  document.getElementById('phone-slot-mobile').appendChild(phoneEl);
+  phVoile.classList.add('on');
+});
+document.getElementById('ph-fermer').addEventListener('click', fermerPhone);
+phVoile.addEventListener('click', function(e){ if (e.target === phVoile) fermerPhone(); });
+function fermerPhone(){
+  phVoile.classList.remove('on');
+  document.getElementById('phone-slot-desktop').appendChild(phoneEl);
+}
+
+function majPhone(){
+  var m = METIERS[metierKey] || null;
+  var nom = val('c-nom') || 'Votre commerce';
+  var commune = val('c-commune');
+  var ile = val('c-ile') || 'Guadeloupe';
+  var a = (palChoisie && palChoisie.a) ? palChoisie.a : '#1F4FBF';
+  var b = (palChoisie && palChoisie.b) ? palChoisie.b : '#EAF0FD';
+  var body = phoneEl.querySelector('#ph-body');
+  body.style.setProperty('--pA', a);
+  body.style.setProperty('--pB', b);
+  body.style.setProperty('--pTxtA', texteSur(a));
+
+  phoneEl.querySelector('#ph-nom').textContent = nom;
+  var logoBox = phoneEl.querySelector('#ph-logo');
+  var logoImg = fichiers.filter(function(f){ return f.url && /logo/i.test(f.nomOrigine); })[0];
+  logoBox.innerHTML = (logoImg ? '<img src="' + logoImg.url + '" alt="">' : '') + nom;
+
+  phoneEl.querySelector('#ph-tag').textContent = (m ? m.tagline : 'Aux Antilles') + (commune ? ' — ' + commune : ' — ' + ile);
+  phoneEl.querySelector('#ph-phrase').textContent = val('c-phrase') || 'Votre phrase d\u2019accroche appara\u00eetra ici.';
+
+  var ctas = m ? m.ctas.slice() : ['Me contacter'];
+  if (radio('whatsapp').indexOf('Oui') === 0 && ctas.indexOf('WhatsApp') === -1) ctas[1] = 'WhatsApp';
+  phoneEl.querySelector('#ph-ctas').innerHTML = ctas.map(function(c, i){
+    return '<span class="ph-cta' + (i > 0 ? ' sec' : '') + '">' + c + '</span>';
+  }).join('');
+
+  var pages = $$('input[name="page"]:checked').map(function(i){ return i.value; });
+  phoneEl.querySelector('#ph-nav').innerHTML = (pages.length ? pages : ['Accueil','Contact']).slice(0, 5).map(function(p){
+    return '<i>' + p + '</i>';
+  }).join('');
+
+  phoneEl.querySelector('#ph-gtitre').textContent = m ? m.photoTitre : 'En images';
+  var imgs = fichiers.filter(function(f){ return f.url; }).slice(0, 6);
+  var grid = phoneEl.querySelector('#ph-grid');
+  grid.innerHTML = imgs.map(function(f){ return '<img src="' + f.url + '" alt="">'; }).join('');
+  for (var i = imgs.length; i < Math.max(4, Math.min(6, imgs.length + 2)); i++) {
+    if (i >= 6) break;
+    grid.innerHTML += '<div class="g-vide">+</div>';
+  }
+}
+
+/* =====================================================
+   PROGRESSION
+   ===================================================== */
+function progression(){
+  var points = 0, total = 12;
+  if (val('c-nom')) points++;
+  if (metierKey) points++;
+  if (val('c-commune')) points++;
+  if (val('c-phrase')) points++;
+  if (val('i-tel') || val('i-email')) points++;
+  if (radio('whatsapp')) points++;
+  if (val('i-horaires')) points++;
+  if ($$('input[name="objectif"]:checked').length) points++;
+  if (radio('logo')) points++;
+  if (palChoisie) points++;
+  if (fichiers.length) points++;
+  if (val('f-nom')) points++;
+  return { p: points, t: total };
+}
+function majBarre(){
+  var pr = progression();
+  var pc = Math.round(pr.p / pr.t * 100);
+  document.getElementById('prog-fill').style.width = pc + '%';
+  document.getElementById('p-nono').style.left = pc + '%';
+  var txt = document.getElementById('prog-txt');
+  if (pr.p === 0) txt.textContent = 'Commencez, Nono suit votre avancée.';
+  else if (pc < 50) txt.textContent = pr.p + ' réponse' + (pr.p > 1 ? 's' : '') + ' — bien parti.';
+  else if (pc < 100) txt.textContent = pr.p + ' réponses — Nono trace la route.';
+  else txt.textContent = 'Fiche complète. Nono est chaud, envoyez !';
+}
+
+function toutMettreAJour(){ majPhone(); majBarre(); }
+
+/* Écoute globale */
+$$('input, textarea, select').forEach(function(e){
+  e.addEventListener('input', toutMettreAJour);
+  e.addEventListener('change', toutMettreAJour);
+});
+document.addEventListener('change', function(e){
+  if (e.target.name === 'whatsapp') {
+    document.getElementById('i-wa-num').classList.toggle('on', e.target.value === 'Oui, un autre num\u00e9ro');
+  }
+});
+remplirSite(METIERS.autre);
+toutMettreAJour();
+
+/* =====================================================
+   RÉCAP + ENVOI
+   ===================================================== */
+function construireRecap(){
+  var m = METIERS[metierKey] || { label: '' };
+  var L = [];
+  L.push('FICHE PROJET SITE — ' + (val('c-nom') || 'Sans nom'));
+  L.push('Envoyée le ' + new Date().toLocaleString('fr-FR', { timeZone: 'America/Guadeloupe' }));
+  L.push('');
+  L.push('— LE COMMERCE —');
+  L.push('Nom : ' + val('c-nom'));
+  L.push('Activité : ' + (metierKey === 'autre' ? val('c-metier-autre') || 'Autre' : m.label));
+  L.push('Lieu : ' + [val('c-commune'), val('c-ile')].filter(Boolean).join(', '));
+  if (val('c-phrase')) L.push('Sa phrase : ' + val('c-phrase'));
+  L.push('');
+  L.push('— À AFFICHER SUR LE SITE —');
+  if (val('i-tel')) L.push('Tél : ' + val('i-tel'));
+  if (val('i-email')) L.push('Email : ' + val('i-email'));
+  if (radio('whatsapp')) L.push('WhatsApp : ' + radio('whatsapp') + (val('i-wa-num') ? ' (' + val('i-wa-num') + ')' : ''));
+  if (val('i-adresse')) L.push('Adresse : ' + val('i-adresse'));
+  if (val('i-horaires')) L.push('Horaires : ' + val('i-horaires'));
+  if (val('i-insta')) L.push('Instagram : ' + val('i-insta'));
+  if (val('i-fb')) L.push('Facebook : ' + val('i-fb'));
+  L.push('');
+  L.push('— LE SITE —');
+  var obj = $$('input[name="objectif"]:checked').map(function(i){ return i.value; });
+  if (obj.length) L.push('Objectifs : ' + obj.join(' / '));
+  (m.speciales || []).forEach(function(s){
+    var r = radio('sp-' + s.nom);
+    if (r) L.push(s.q + ' ' + r);
+  });
+  var pages = $$('input[name="page"]:checked').map(function(i){ return i.value; });
+  if (pages.length) L.push('Pages : ' + pages.join(' / '));
+  if (val('s-aimes')) L.push('Sites aimés : ' + val('s-aimes'));
+  L.push('');
+  L.push('— LE STYLE —');
+  if (radio('logo')) L.push('Logo : ' + radio('logo'));
+  if (palChoisie) L.push('Couleurs : ' + palChoisie.nom + (palChoisie.a ? ' (' + palChoisie.a + ')' : ''));
+  if (radio('ambiance')) L.push('Ambiance : ' + radio('ambiance'));
+  L.push('');
+  L.push('— FICHIERS —');
+  if (fichiers.length) {
+    fichiers.forEach(function(f){ L.push('• ' + f.nomOrigine + ' (' + (f.taille / 1024).toFixed(0) + ' Ko)'); });
+  } else {
+    L.push('Aucun fichier joint pour l\u2019instant.');
+  }
+  L.push('');
+  L.push('— CONTACT —');
+  L.push('Qui : ' + val('f-nom'));
+  if (val('f-tel')) L.push('Numéro direct : ' + val('f-tel'));
+  if (radio('moment')) L.push('Meilleur moment : ' + radio('moment'));
+  if (val('f-mot')) L.push('Son mot : ' + val('f-mot'));
+  return L.join('\n');
+}
+
+function champsOk(){
+  var ok = true;
+  var oblig = [document.getElementById('c-nom'), document.getElementById('f-nom')];
+  oblig.forEach(function(e){
+    e.classList.remove('err');
+    if (!e.value.trim()) { e.classList.add('err'); if (ok) { e.scrollIntoView({ behavior: 'smooth', block: 'center' }); e.focus({ preventScroll: true }); } ok = false; }
+  });
+  if (!metierKey) {
+    grille.style.outline = '3px solid #c0261f';
+    if (ok) grille.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(function(){ grille.style.outline = ''; }, 2500);
+    ok = false;
+  }
+  var tel = document.getElementById('i-tel'), em = document.getElementById('i-email');
+  tel.classList.remove('err'); em.classList.remove('err');
+  if (!val('i-tel') && !val('i-email') && !val('f-tel')) {
+    tel.classList.add('err'); em.classList.add('err');
+    if (ok) tel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    ok = false;
+  }
+  return ok;
+}
+
+var voile = document.getElementById('voile');
+var modale = document.getElementById('modale');
+
+function slug(txt){
+  return (txt || 'fichier').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9._-]+/g, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'fichier';
+}
+
+/* Les données de la fiche, stockées en JSON à côté des fichiers */
+function construireDonnees(liens){
+  var m = METIERS[metierKey] || { label: '', speciales: [] };
+  return {
+    nom: val('c-nom'),
+    metier: metierKey === 'autre' ? (val('c-metier-autre') || 'Autre') : m.label,
+    commune: val('c-commune'), ile: val('c-ile'), phrase: val('c-phrase'),
+    tel: val('i-tel'), email: val('i-email'),
+    whatsapp: radio('whatsapp'), waNum: val('i-wa-num'),
+    adresse: val('i-adresse'), horaires: val('i-horaires'),
+    insta: val('i-insta'), fb: val('i-fb'),
+    objectifs: $$('input[name="objectif"]:checked').map(function(i){ return i.value; }),
+    speciales: (m.speciales || []).map(function(s){ return { q: s.q, r: radio('sp-' + s.nom) }; }).filter(function(x){ return x.r; }),
+    pages: $$('input[name="page"]:checked').map(function(i){ return i.value; }),
+    aimes: val('s-aimes'), logo: radio('logo'),
+    couleurs: palChoisie ? palChoisie.nom + (palChoisie.a ? ' (' + palChoisie.a + ')' : '') : '',
+    couleurHex: palChoisie && palChoisie.a ? palChoisie.a : '',
+    ambiance: radio('ambiance'),
+    contactNom: val('f-nom'), contactTel: val('f-tel'),
+    moment: radio('moment'), mot: val('f-mot'),
+    date: new Date().toLocaleString('fr-FR', { timeZone: 'America/Guadeloupe' }),
+    fichiers: liens
+  };
+}
+
+/* Upload d'un contenu vers le bucket, rend le lien public */
+function uploaderVers(chemin, corps, type){
+  return fetch(CONFIG.SUPABASE_URL + '/storage/v1/object/' + CONFIG.BUCKET + '/' + chemin, {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + CONFIG.SUPABASE_KEY,
+      'apikey': CONFIG.SUPABASE_KEY,
+      'Content-Type': type || 'application/octet-stream'
+    },
+    body: corps
+  }).then(function(r){
+    if (!r.ok) throw new Error('upload');
+    return CONFIG.SUPABASE_URL + '/storage/v1/object/public/' + CONFIG.BUCKET + '/' + chemin;
+  });
+}
+
+function supabasePret(){
+  return CONFIG.SUPABASE_URL.indexOf('https://') === 0 && CONFIG.SUPABASE_KEY.length > 30;
+}
+
+/* Envoie les fichiers vers Supabase Storage, rend la liste des liens publics */
+function envoyerFichiers(){
+  if (!supabasePret()) return Promise.resolve({ liens: [], page: null });
+  var dossier = slug(val('c-nom')) + '-' + Date.now();
+  var envois = fichiers.map(function(f, i){
+    var chemin = dossier + '/' + (i + 1) + '-' + slug(f.nomOrigine);
+    return uploaderVers(chemin, f.file, f.type).then(function(lien){
+      return { nom: f.nomOrigine, lien: lien };
+    });
+  });
+  return Promise.all(envois).then(function(liens){
+    // Les données pour la belle fiche, lue sur studionovalem.fr/projet/fiche
+    return uploaderVers(dossier + '/donnees.json', new Blob([JSON.stringify(construireDonnees(liens))], { type: 'application/json' }), 'application/json')
+      .then(function(){ return { liens: liens, page: location.origin + '/projet/fiche?d=' + dossier }; })
+      .catch(function(){ return { liens: liens, page: null }; });
+  });
+}
+
+/* Envoie la fiche texte par FormSubmit (le canal qui marche, en JSON) */
+function envoyerFiche(recap){
+  return fetch('https://formsubmit.co/ajax/' + CONFIG.EMAIL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      _captcha: 'false',
+      _subject: 'Fiche projet site — ' + (val('c-nom') || 'nouveau client'),
+      _template: 'box',
+      commerce: val('c-nom'),
+      contact: val('f-nom') + ' / ' + (val('f-tel') || val('i-tel') || val('i-email')),
+      fiche: recap
+    })
+  }).then(function(r){ if (!r.ok) throw new Error('refus'); return r.json(); });
+}
+
+document.getElementById('btn-envoi').addEventListener('click', function(){
+  if (!champsOk()) return;
+  var btn = this;
+  btn.disabled = true;
+  btn.textContent = 'Envoi\u2026';
+
+  envoyerFichiers()
+    .then(function(res){ res.rate = false; return res; })
+    .catch(function(){ return { liens: [], page: null, rate: true }; })
+    .then(function(res){
+      var recap = construireRecap();
+      if (res.page) {
+        recap = '>>> OUVRIR LA FICHE COMPL\u00c8TE (belle version, photos incluses) :\n' + res.page + '\n\n' + recap;
+      }
+      if (res.liens.length) {
+        recap += '\n\n— LIENS DE T\u00c9L\u00c9CHARGEMENT —\n' +
+          res.liens.map(function(l){ return '\u2022 ' + l.nom + '\n  ' + l.lien; }).join('\n');
+      } else if (fichiers.length) {
+        recap += '\n\n(Fichiers non transmis en ligne : le client les enverra par WhatsApp.)';
+      }
+      var waNecessaire = fichiers.length > 0 && res.liens.length === 0;
+      return envoyerFiche(recap)
+        .then(function(){ ecranMerci(waNecessaire); })
+        .catch(function(){ ecranSecours(recap); });
+    })
+    .finally(function(){ btn.disabled = false; btn.textContent = 'Envoyer ma fiche'; });
+});
+
+function lienWa(txt){
+  return 'https://wa.me/' + CONFIG.WHATSAPP + '?text=' + encodeURIComponent(txt);
+}
+
+function ecranMerci(fichiersParWa){
+  var waTxt = 'Bonjour Louis, je viens d\u2019envoyer ma fiche projet pour ' + (val('c-nom') || 'mon commerce') + '. Voici mes fichiers :';
+  modale.innerHTML =
+    '<div class="done-nono">' + nono('drapeau') + '</div>' +
+    '<h3>C\u2019est <span>re\u00e7u</span> !</h3>' +
+    '<p>Merci ' + (val('f-nom').split(' ')[0] || '') + '. Je lis tout \u00e7a et je commence \u00e0 travailler sur votre site. Vous recevez un premier aper\u00e7u sous 48 h, puis on se cale 5 minutes au t\u00e9l\u00e9phone pour ajuster.</p>' +
+    (fichiersParWa
+      ? '<p><b>Dernier petit geste :</b> vos fichiers n\u2019ont pas pu partir en ligne. Un clic et vous me les envoyez sur WhatsApp :</p>' +
+        '<div class="m-btns"><a class="m-btn vert" target="_blank" rel="noopener" href="' + lienWa(waTxt) + '">Envoyer mes fichiers sur WhatsApp</a></div>'
+      : '<p>Une photo ou une id\u00e9e de derni\u00e8re minute ? Envoyez-la moi directement sur <a href="' + lienWa('Bonjour Louis, une pr\u00e9cision sur ma fiche projet :') + '" target="_blank" rel="noopener">WhatsApp</a>.</p>');
+  voile.classList.add('on');
+  confettis();
+}
+
+function ecranSecours(recap){
+  var mailto = 'mailto:' + CONFIG.EMAIL +
+    '?subject=' + encodeURIComponent('Fiche projet site — ' + (val('c-nom') || '')) +
+    '&body=' + encodeURIComponent(recap);
+  modale.innerHTML =
+    '<h3>Petit <span>souci</span> de connexion.</h3>' +
+    '<p>Pas de panique, vos r\u00e9ponses sont l\u00e0. Choisissez le plus simple pour me les faire passer :</p>' +
+    '<div class="recap-box">' + recap.replace(/</g, '&lt;') + '</div>' +
+    '<div class="m-btns">' +
+    '<a class="m-btn vert" target="_blank" rel="noopener" href="' + lienWa('Bonjour Louis, ma fiche projet :\n\n' + recap).slice(0, 8000) + '">Par WhatsApp</a>' +
+    '<a class="m-btn bleu" href="' + mailto + '">Par email</a>' +
+    '<button class="m-btn jaune" id="btn-copier" type="button">Copier le texte</button>' +
+    '<button class="m-btn" id="btn-telecharger" type="button">T\u00e9l\u00e9charger</button>' +
+    '</div>';
+  document.getElementById('btn-copier').addEventListener('click', function(){
+    var b = this;
+    navigator.clipboard.writeText(recap).then(function(){
+      b.textContent = 'Copi\u00e9 !';
+      setTimeout(function(){ b.textContent = 'Copier le texte'; }, 1800);
+    });
+  });
+  document.getElementById('btn-telecharger').addEventListener('click', function(){
+    var blob = new Blob([recap], { type: 'text/plain;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'fiche-projet-site.txt';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+  voile.classList.add('on');
+}
+
+voile.addEventListener('click', function(e){ if (e.target === voile) voile.classList.remove('on'); });
+
+/* =====================================================
+   CONFETTIS
+   ===================================================== */
+function confettis(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cv = document.getElementById('confetti');
+  cv.style.display = 'block';
+  cv.width = innerWidth; cv.height = innerHeight;
+  var ctx = cv.getContext('2d');
+  var cols = ['#1F4FBF', '#F5C400', '#111', '#fff'];
+  var parts = [];
+  for (var i = 0; i < 120; i++) {
+    parts.push({
+      x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5,
+      vy: 2.5 + Math.random() * 3.5, vx: -1.5 + Math.random() * 3,
+      s: 5 + Math.random() * 6, r: Math.random() * Math.PI, vr: -0.12 + Math.random() * 0.24,
+      c: cols[i % cols.length]
+    });
+  }
+  var t0 = performance.now();
+  (function boucle(t){
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    parts.forEach(function(p){
+      p.x += p.vx; p.y += p.vy; p.r += p.vr;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+      ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * 0.6);
+      ctx.restore();
+    });
+    if (t - t0 < 2800) requestAnimationFrame(boucle);
+    else { cv.style.display = 'none'; }
+  })(t0);
+}
+</script>
+</body>
+</html>

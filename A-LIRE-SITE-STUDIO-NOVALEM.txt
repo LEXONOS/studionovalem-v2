@@ -1,0 +1,51 @@
+SITE STUDIO NOVALEM : ce qu'il y a et quoi faire, clic par clic.
+
+CE QU'IL Y A (dossier site/)
+  index.html    la page complete (une page, 10 sections, menu mobile, formulaire)
+  style.css     la charte enseigne : bleu volet, jaune tole, chaux, Anton + Work Sans
+  assets/       logo, favicon, icone iPhone, image de partage (og.png)
+  robots.txt, sitemap.xml
+Code natif, zero dependance, zero framework : exactement ce que tu vends.
+
+METTRE EN LIGNE SUR VERCEL (10 minutes)
+1. GitHub > New repository > nom "studio-novalem" > Create.
+2. Sur la page du repo vide : "uploading an existing file" > glisse index.html, style.css, robots.txt,
+   sitemap.xml ET le dossier assets (glisse le dossier entier, pas son contenu) > Commit changes.
+3. vercel.com > Add New > Project > Import "studio-novalem" > Framework Preset : Other > Deploy.
+4. Vercel > Settings > Domains > Add > studionovalem.fr > Add. Vercel affiche 2 lignes.
+5. Chez ton registrar (la ou tu as achete studionovalem.fr) > zone DNS :
+   - enregistrement A     @    76.76.21.21
+   - enregistrement CNAME www  cname.vercel-dns.com
+   Ne touche PAS aux serveurs de noms (NS) et ne supprime PAS les lignes MX (tes emails).
+6. Attends 10 a 30 minutes, recharge la page Domains dans Vercel : "Valid Configuration".
+   Le HTTPS se fait tout seul.
+
+LE FORMULAIRE (2 minutes, une seule fois)
+7. Une fois le site en ligne, remplis le formulaire toi-meme et envoie.
+8. Tu recois un email de formsubmit.co "Activate form" : clique Activate. A partir de la, chaque
+   demande arrive sur contact@studionovalem.fr avec prenom, commerce, telephone, ile, besoin, message.
+   (Sans cette activation, le premier envoi est bloque. C'est gratuit et sans compte.)
+
+A VERIFIER TOI-MEME (je ne peux pas d'ici)
+9. Le lien Instagram du pied de page pointe vers instagram.com/studionovalem : change-le si le
+   pseudo final est different (2 endroits : le pied de page et le bloc JSON-LD en haut de index.html).
+10. Le lien "Decouvrir Novalemo" pointe vers https://novalemo.fr : il marchera quand tu auras le
+    domaine (mission 5, page d'accueil publique). En attendant il tombe dans le vide : si tu veux,
+    remplace-le par https://novalemo-saas.vercel.app le temps que novalemo.fr existe.
+11. Le numero affiche est +590 691 25 34 49 (Antilles) et 06 58 21 20 90 (metropole) : verifie.
+12. Le SIRET est ecrit 103 405 247 00018 d'apres ton PDF : verifie les chiffres.
+
+POUR MODIFIER UN TEXTE
+Ouvre index.html dans un editeur (VS Code), cherche le texte, change-le, sauvegarde, glisse le
+fichier sur GitHub (Add file > Upload files > ecrase) : Vercel remet en ligne en 30 secondes.
+
+POUR CHANGER UN PRIX
+Les prix sont ecrits en clair dans index.html (section "formules", "options", "abonnements").
+Meme methode.
+
+CE QUE JE N'AI PAS FAIT
+- Pas de vraies photos (je n'en ai pas) : la realisation IFC est un cadre stylise avec le lien vers
+  ifc-guadeloupe.fr. Ajoute une capture du vrai site si tu veux (assets/ifc.jpg, et dans la section
+  "realisation" remplace le div .scene par <img src="assets/ifc.jpg" alt="Site IFC">).
+- Pas de page mentions legales separee : les mentions sont dans le pied de page. Si tu veux une
+  page a part, dis-le.
