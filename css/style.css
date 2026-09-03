@@ -683,6 +683,51 @@ footer .brand span small { color: var(--jaune); }
   .voie, .vo-ico svg, .vo-go i { transition: none !important; transform: none !important; }
 }
 
+/* La poignee de main : section nocturne pilotee par le defilement */
+.pacte { position: relative; overflow: hidden; background: var(--nuit); padding: calc(var(--pad) * 1.2) 0; border-block: 3px solid var(--goudron); --hs: 0; }
+.pacte-stars { position: absolute; inset: 0; pointer-events: none; }
+.pacte-stars i { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #F7F5EF; opacity: .0; animation: pa-twinkle 3.4s ease-in-out infinite; animation-delay: var(--td, 0s); }
+.pacte-stars i.big { width: 5px; height: 5px; box-shadow: 0 0 10px 2px rgba(245,196,0,.35); background: var(--jaune); }
+@keyframes pa-twinkle { 0%,100% { opacity: .06; } 50% { opacity: .85; } }
+.pacte-head { text-align: center; color: var(--chaux); max-width: 640px; margin: 0 auto 8px; position: relative; z-index: 2; }
+.pacte-head h2 { color: var(--chaux); font-size: clamp(30px, 5vw, 52px); margin: 0 0 12px; }
+.pacte-head h2 em { font-style: normal; color: var(--jaune); }
+.pacte-head p { color: #B9C4BE; margin: 0; font-size: 17px; }
+.pacte-scene { position: relative; margin: -10px auto 6px; max-width: 1100px; }
+.pacte-scene svg { width: 100%; height: auto; display: block; }
+/* les deux bras avancent l'un vers l'autre avec le defilement (--hs de 0 a 1) */
+.pa-vous { transform: translateX(calc((1 - var(--hs)) * -14%)); }
+.pa-nono { transform: translateX(calc((1 - var(--hs)) * 14%)); }
+.pa-vous, .pa-nono { transition: transform 80ms linear; will-change: transform; }
+/* trace progressif des bras */
+.pa-draw { stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--hs)); }
+/* l'etincelle ne s'allume qu'a la rencontre */
+.pa-spark { opacity: calc((var(--hs) - 0.72) * 5); transform-origin: 618px 205px; transform: scale(calc(0.55 + var(--hs) * 0.45)); }
+.pa-rays { opacity: 0; transform-origin: 618px 205px; }
+.pacte.lit .pa-spark { animation: pa-pulse 1.1s var(--pop) infinite; }
+.pacte.lit .pa-rays { opacity: 1; animation: pa-rot 2.6s linear infinite; }
+@keyframes pa-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.18); } }
+@keyframes pa-rot { to { transform: rotate(360deg); } }
+.pacte.lit .pacte-stars i { animation-duration: 1.6s; }
+.pacte-cta { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; position: relative; z-index: 2; margin-top: 10px; }
+@media (max-width: 720px) {
+  .pacte-scene { margin-top: 4px; }
+  .pacte-cta .btn { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pacte { --hs: 1 !important; }
+  .pa-vous, .pa-nono { transition: none; }
+  .pacte.lit .pa-spark, .pacte.lit .pa-rays, .pacte-stars i { animation: none; opacity: 1; }
+}
+
+/* Ambiance du heros : parallaxe souris et lucioles */
+.hero .scene { will-change: transform; }
+.scene .sf-sign, .scene .sf-facade, .scene .sf-phone, .nono-hero { will-change: transform; transition: transform 120ms linear; }
+.lucioles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.lucioles i { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--jaune); box-shadow: 0 0 8px 2px rgba(245,196,0,.5); opacity: .7; animation: luc-float var(--lt, 9s) ease-in-out infinite alternate; animation-delay: var(--ld, 0s); }
+@keyframes luc-float { from { transform: translate(0, 0) scale(.8); opacity: .25; } 50% { opacity: .8; } to { transform: translate(var(--lx, 30px), var(--ly, -60px)) scale(1.1); opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .lucioles { display: none; } .scene .sf-sign, .scene .sf-facade, .scene .sf-phone, .nono-hero { transition: none; } }
+
 /* Section fiche projet : le cadrage sans rendez-vous */
 .fiche { padding: var(--pad) 0; background: var(--blanc); border-block: 3px solid var(--goudron); }
 .fiche-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; }

@@ -517,3 +517,93 @@
     });
   }
 })();
+
+/* ---------- La poignee de main + ambiance du heros ---------- */
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var touch = window.matchMedia('(hover: none)').matches;
+
+  /* Etoiles de la nuit */
+  var starsBox = document.querySelector('.pacte-stars');
+  if (starsBox) {
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < 46; i++) {
+      var s = document.createElement('i');
+      s.style.left = (Math.random() * 100) + '%';
+      s.style.top = (Math.random() * 100) + '%';
+      s.style.setProperty('--td', (Math.random() * 3.4).toFixed(2) + 's');
+      if (Math.random() < 0.18) s.className = 'big';
+      frag.appendChild(s);
+    }
+    starsBox.appendChild(frag);
+  }
+
+  /* Progression au defilement : les bras se rejoignent, l'etincelle s'allume */
+  var pacte = document.getElementById('pacte');
+  if (pacte && !reduce) {
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var r = pacte.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var p = (vh - r.top) / (vh * 0.85);
+      p = Math.max(0, Math.min(1, p));
+      pacte.style.setProperty('--hs', p.toFixed(3));
+      pacte.classList.toggle('lit', p > 0.93);
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  } else if (pacte) {
+    pacte.classList.add('lit');
+  }
+
+  /* Lucioles dans le heros */
+  var heroScene = document.querySelector('.hero .scene');
+  var hero = document.querySelector('.hero');
+  if (hero && !reduce) {
+    var luc = document.createElement('div');
+    luc.className = 'lucioles';
+    luc.setAttribute('aria-hidden', 'true');
+    for (var j = 0; j < 9; j++) {
+      var f = document.createElement('i');
+      f.style.left = (8 + Math.random() * 84) + '%';
+      f.style.top = (20 + Math.random() * 70) + '%';
+      f.style.setProperty('--lt', (7 + Math.random() * 6).toFixed(1) + 's');
+      f.style.setProperty('--ld', (Math.random() * 6).toFixed(1) + 's');
+      f.style.setProperty('--lx', ((Math.random() - 0.5) * 90).toFixed(0) + 'px');
+      f.style.setProperty('--ly', (-(30 + Math.random() * 70)).toFixed(0) + 'px');
+      luc.appendChild(f);
+    }
+    hero.style.position = 'relative';
+    hero.appendChild(luc);
+  }
+
+  /* Parallaxe souris sur la devanture */
+  if (heroScene && !reduce && !touch) {
+    var layers = [
+      [heroScene.querySelector('.sf-facade'), 6],
+      [heroScene.querySelector('.sf-sign'), 14],
+      [heroScene.querySelector('.sf-phone'), 22],
+      [document.getElementById('nono-hero'), 30]
+    ];
+    var raf2 = null;
+    hero.addEventListener('mousemove', function (e) {
+      if (raf2) return;
+      raf2 = requestAnimationFrame(function () {
+        var r = hero.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        layers.forEach(function (l) {
+          if (l[0]) l[0].style.transform = 'translate(' + (x * l[1]) + 'px,' + (y * l[1] * 0.6) + 'px)';
+        });
+        raf2 = null;
+      });
+    });
+    hero.addEventListener('mouseleave', function () {
+      layers.forEach(function (l) { if (l[0]) l[0].style.transform = ''; });
+    });
+  }
+})();
